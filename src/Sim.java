@@ -4,19 +4,19 @@ import java.util.List;
 import java.util.Random;
 import java.util.Spliterator;
 
-import Enviorment.Enviroment;
-import Enviorment.Position;
-import Enviorment.SpaceCheck;
 import Organisms.Grass;
 import Organisms.Organism;
 import Animals.*;
+import Environment.Environment;
+import Environment.Position;
+import Environment.SpaceCheck;
 
 public class Sim implements SpaceCheck {
 
 private final int gridSize=100;
 private List<Organism> organisms = new ArrayList<>();
 private int tickCount = 0;
-Enviroment e= new Enviroment();
+Environment e= new Environment();
 private final int seasonLength=75;
 
 

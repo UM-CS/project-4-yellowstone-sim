@@ -1,14 +1,14 @@
 package Animals;
-import Enviorment.Enviroment;
-import Enviorment.Position;
-import Enviorment.SpaceCheck;
+import Environment.Environment;
+import Environment.Position;
+import Environment.SpaceCheck;
 
 public class elk extends Animal {
     boolean canReproduce;
     double fleeSpeed;
     
-    public elk(Enviroment e, SpaceCheck sc, double intitialHealth, Position position, int hunger, double speed, int reproductionAge, int sightRange, String ID) {
-        super(e, sc, intitialHealth, hunger, speed, reproductionAge, sightRange, position);
+    public elk(String ID, Environment e, SpaceCheck spaceCheck, double intitialHealth, int hunger, double speed, int reproductionAge, int sightRange, Position position) {
+        super(ID, e, spaceCheck, intitialHealth, hunger, speed, reproductionAge, sightRange, position);
         canReproduce=false;
         fleeSpeed=2.0*speed;
         this.ID=ID;

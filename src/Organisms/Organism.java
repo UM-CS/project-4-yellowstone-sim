@@ -1,11 +1,11 @@
 package Organisms;
 
-import Enviorment.*;
+import Environment.*;
 
 
 public abstract class Organism{
 
-    Enviroment enviroment;
+    Environment enviroment;
     protected SpaceCheck spacecheck ;
     protected int age; 
     protected String ID;
@@ -13,10 +13,10 @@ public abstract class Organism{
     protected Position position;
     protected boolean alive;
 
-    public Organism(Enviroment e, SpaceCheck sc ,double intitialHealth)
+    public Organism(Environment e, SpaceCheck spaceCheck ,double intitialHealth)
     {
         enviroment=e;
-        spacecheck =sc;
+        this.spacecheck =spaceCheck;
         age=0;
         ID="organism";
         health = intitialHealth;

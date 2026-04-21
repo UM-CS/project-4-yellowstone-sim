@@ -1,4 +1,4 @@
-package Enviorment;
+package Environment;
 
 import java.util.List;
 import Organisms.Organism;
