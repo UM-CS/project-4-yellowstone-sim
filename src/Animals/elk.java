@@ -1,20 +1,18 @@
 package Animals;
 import Enviorment.Enviroment;
 import Enviorment.Position;
+import Enviorment.SpaceCheck;
 
 public class elk extends Animal {
     boolean canReproduce;
     double fleeSpeed;
     
-    public elk(Enviroment e, double intitialHealth, int hunger, double speed, int reproductionAge, int sightRange, String ID) {
-        super(e, intitialHealth, hunger, speed, reproductionAge, sightRange);
+    public elk(Enviroment e, SpaceCheck sc, double intitialHealth, Position position, int hunger, double speed, int reproductionAge, int sightRange, String ID) {
+        super(e, sc, intitialHealth, hunger, speed, reproductionAge, sightRange, position);
         canReproduce=false;
         fleeSpeed=2.0*speed;
         this.ID=ID;
     }
-
-    
-
 
  
 
@@ -40,6 +38,10 @@ public class elk extends Animal {
     public void act() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'act'");
+    }
+    public String getID()
+    {
+        return ID;
     }
 
 

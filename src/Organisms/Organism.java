@@ -6,15 +6,17 @@ import Enviorment.*;
 public abstract class Organism{
 
     Enviroment enviroment;
+    protected SpaceCheck spacecheck ;
     protected int age; 
     protected String ID;
     protected double health;
     protected Position position;
     protected boolean alive;
 
-    public Organism(Enviroment e ,double intitialHealth)
+    public Organism(Enviroment e, SpaceCheck sc ,double intitialHealth)
     {
         enviroment=e;
+        spacecheck =sc;
         age=0;
         ID="organism";
         health = intitialHealth;
@@ -37,5 +39,20 @@ public abstract class Organism{
 
     public abstract void change();
 
+    public Position getPosition() { 
+    return position; 
+    }
 
+    @Override
+public String toString() {
+    return String.format("[%s] Age: %d | Health: %.1f | Pos: %s | Alive: %s",
+        ID, age, health,
+        position != null ? position.toString() : "None",
+        alive ? "Yes" : "No");
+}
+
+  public String getID()
+    {
+        return ID;
+    }
 }
