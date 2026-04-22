@@ -58,7 +58,7 @@ public double distaceTo(Position other)
 @Override
 public String toString()
 {
-    return  String.format(" | x: %d | y: %d ",
+    return  String.format(" x: %d y: %d ",
         x,y);
 }
 }

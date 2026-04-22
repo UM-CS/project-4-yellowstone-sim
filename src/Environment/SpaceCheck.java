@@ -4,5 +4,5 @@ import java.util.List;
 import Organisms.Organism;
 
 public interface SpaceCheck {
-    List<Organism> getOrganismsWithinRange(Organism source, double range);
+    List<Organism> getOrganismsWithinRange(Organism source, int range);
 }

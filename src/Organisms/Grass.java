@@ -1,13 +1,14 @@
 package Organisms;
 import Environment.Environment;
 import Environment.SpaceCheck;
+import Drivers.Sim;
 public class Grass extends Organism{
 
     private double growthRate=environment.getGrowthChange();
     private boolean isGrazed;
 
-    public Grass(Environment e, SpaceCheck spaceCheck, double intitialHealth) {
-        super(e, spaceCheck, intitialHealth);
+    public Grass(Sim sim ,String ID, Environment e, double intitialHealth) {
+        super(sim ,ID, e, intitialHealth);
         isGrazed=false;
         
     }

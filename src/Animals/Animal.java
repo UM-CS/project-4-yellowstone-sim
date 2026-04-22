@@ -1,21 +1,22 @@
 package Animals;
 import java.util.List;
 
+import Drivers.Sim;
 import Environment.*;
 
 import Organisms.Organism;
 
 public abstract class Animal extends Organism{
     protected double hunger;
-    private int maxAge;
-    private int sightRange;
+    protected int maxAge;
+    protected int sightRange;
     protected int speed;
-    private int reproductionAge;
-    protected SpaceCheck spaceCheck;
+    protected int reproductionAge;
+    protected SpaceCheck world;
     protected String ID;
 
-    public Animal(String ID, Environment e, SpaceCheck sc, double intitialHealth, double hunger, int speed, int reproductionAge, int sightRange, Position position) {
-        super(ID, e, sc, intitialHealth);
+    public Animal(Sim sim, String ID, Environment e, double intitialHealth, double hunger, int speed, int reproductionAge, int sightRange, Position position) {
+        super(sim, ID, e, intitialHealth);
         this.hunger=hunger;
         this.sightRange=sightRange;
         this.speed=speed;

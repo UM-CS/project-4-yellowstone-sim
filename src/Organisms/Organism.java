@@ -2,21 +2,24 @@ package Organisms;
 
 import Environment.*;
 
+import Drivers.Sim;
 
 public abstract class Organism{
 
+    protected Sim sim;
     protected Environment environment;
-    protected SpaceCheck spacecheck ;
     protected int age; 
     protected String ID;
     protected double health;
     protected Position position;
     protected boolean alive;
 
-    public Organism(String ID, Environment e, SpaceCheck spaceCheck ,double intitialHealth)
+
+
+    public Organism(Sim sim2,String ID, Environment e ,double intitialHealth)
     {
+        this.sim=sim2;
         environment=e;
-        this.spacecheck =spaceCheck;
         age=0;
         this.ID=ID;
         health = intitialHealth;

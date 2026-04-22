@@ -1,4 +1,5 @@
 package Animals;
+import Drivers.Sim;
 import Environment.Environment;
 import Environment.Position;
 import Environment.SpaceCheck;
@@ -7,8 +8,8 @@ public class wolf extends Animal{
 
     private double huntSpeed;
 
-    public wolf(String ID, Environment e, SpaceCheck spaceCheck, double intitialHealth, double hunger, int speed, int reproductionAge, int sightRange, Position position) {
-        super(ID, e, spaceCheck,intitialHealth, hunger, speed, reproductionAge, sightRange, position);
+    public wolf(Sim sim, String ID, Environment e, double intitialHealth, double hunger, int speed, int reproductionAge, int sightRange, Position position) {
+        super(sim, ID, e, intitialHealth, hunger, speed, reproductionAge, sightRange, position);
         huntSpeed= speed*1.5;
        
         
