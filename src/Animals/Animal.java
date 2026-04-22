@@ -1,26 +1,27 @@
 package Animals;
 import java.util.List;
 
-import Enviorment.Enviroment;
-import Enviorment.Position;
-import Enviorment.SpaceCheck;
+import Environment.*;
+
 import Organisms.Organism;
 
 public abstract class Animal extends Organism{
-    private int hunger;
+    protected double hunger;
     private int maxAge;
     private int sightRange;
-    private double speed;
+    protected int speed;
     private int reproductionAge;
     protected SpaceCheck spaceCheck;
+    protected String ID;
 
-    public Animal(Enviroment e, SpaceCheck sc, double intitialHealth,int hunger, double speed,int reproductionAge,int sightRange, Position position) {
-        super(e, sc, intitialHealth);
+    public Animal(String ID, Environment e, SpaceCheck sc, double intitialHealth, double hunger, int speed, int reproductionAge, int sightRange, Position position) {
+        super(ID, e, sc, intitialHealth);
         this.hunger=hunger;
         this.sightRange=sightRange;
         this.speed=speed;
         this.reproductionAge=reproductionAge;
         this.position = position;
+        
         
     }
 
@@ -29,26 +30,13 @@ public abstract class Animal extends Organism{
 
     public void change()
     {
-        
-        // hunger=hunger-10;
-       
-        // if(hunger<1)
-        // {
-        //     System.out.println(ID+"'s hunger:" + hunger);
-        //     perish();
-            
-        // }
+        hunger = hunger-(5*environment.getHungerMultiplier());
+        age=age+1;
 
-        List<Organism> close =spacecheck.getOrganismsWithinRange(this,sightRange);
+    }
 
-        
-        System.out.print(this.getID() +" is close to ");
-        for(Organism x:close)
-        {
-            System.out.print(x.getID());
-            System.out.println("\n");
-
-        }
+    public void act()
+    {
 
     }
 
@@ -56,12 +44,13 @@ public abstract class Animal extends Organism{
     
     protected abstract void moveTo(Position position);
     
+    
     protected abstract Position findFood();
 
 
     @Override
 public String toString() {
-    return super.toString() + String.format(" | Hunger: %d | Speed: %.1f | Sight: %d",
+    return super.toString() + String.format(" | Hunger: %.1f | Speed: %d | Sight: %d",
         hunger, speed, sightRange);
 }
 }

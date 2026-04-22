@@ -1,16 +1,16 @@
 package Animals;
-import Enviorment.Enviroment;
-import Enviorment.Position;
-import Enviorment.SpaceCheck;
+import Environment.Environment;
+import Environment.Position;
+import Environment.SpaceCheck;
 
 public class wolf extends Animal{
 
     private double huntSpeed;
 
-    public wolf(Enviroment e, SpaceCheck sc, double intitialHealth, Position position, int hunger, double speed, int reproductionAge, int sightRange, String ID) {
-        super(e, sc,intitialHealth, hunger, speed, reproductionAge, sightRange, position);
+    public wolf(String ID, Environment e, SpaceCheck spaceCheck, double intitialHealth, double hunger, int speed, int reproductionAge, int sightRange, Position position) {
+        super(ID, e, spaceCheck,intitialHealth, hunger, speed, reproductionAge, sightRange, position);
         huntSpeed= speed*1.5;
-        this.ID = ID;
+       
         
     }
 

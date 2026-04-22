@@ -1,16 +1,16 @@
 package Animals;
-import Enviorment.Enviroment;
-import Enviorment.Position;
-import Enviorment.SpaceCheck;
+import Environment.Environment;
+import Environment.Position;
+import Environment.SpaceCheck;
 
 public class elk extends Animal {
     boolean canReproduce;
     double fleeSpeed;
     
-    public elk(Enviroment e, SpaceCheck sc, double intitialHealth, Position position, int hunger, double speed, int reproductionAge, int sightRange, String ID) {
-        super(e, sc, intitialHealth, hunger, speed, reproductionAge, sightRange, position);
+    public elk(String ID, Environment e, SpaceCheck spaceCheck, double intitialHealth, double hunger, int speed, int reproductionAge, int sightRange, Position position) {
+        super(ID, e, spaceCheck, intitialHealth, hunger, speed, reproductionAge, sightRange, position);
         canReproduce=false;
-        fleeSpeed=2.0*speed;
+        fleeSpeed=2*speed;
         this.ID=ID;
     }
 
@@ -24,8 +24,7 @@ public class elk extends Animal {
 
     @Override
     protected void moveTo(Position position) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'moveTo'");
+        this.position=position;
     }
     
     @Override
@@ -33,12 +32,50 @@ public class elk extends Animal {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findFood'");
     }
+    @Override 
+    public void change()
+    {
+        super.change();
+        if(environment.getSeason()=="Fall")
+        {
+            this.canReproduce=true;
+        }
+        else
+        {
+            this.canReproduce=false;
+        }
+
+    }
     
     @Override
     public void act() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'act'");
+        if(hunger<=0)
+        {
+            perish();
+            return;
+        }
+        else if(hunger<75)
+        {
+            findFood();
+        }
+        else if(canReproduce)
+        {
+            reproduce();
+        }
+        else
+        {
+            wander();
+        }
+    
+
     }
+    private void wander() {
+
+        moveTo(position.randomPosition(position,speed));
+    }
+
+
+
     public String getID()
     {
         return ID;

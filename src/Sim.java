@@ -4,19 +4,19 @@ import java.util.List;
 import java.util.Random;
 import java.util.Spliterator;
 
-import Enviorment.Enviroment;
-import Enviorment.Position;
-import Enviorment.SpaceCheck;
 import Organisms.Grass;
 import Organisms.Organism;
 import Animals.*;
+import Environment.Environment;
+import Environment.Position;
+import Environment.SpaceCheck;
 
 public class Sim implements SpaceCheck {
 
 private final int gridSize=100;
 private List<Organism> organisms = new ArrayList<>();
 private int tickCount = 0;
-Enviroment e= new Enviroment();
+Environment e= new Environment();
 private final int seasonLength=75;
 
 
@@ -30,8 +30,8 @@ private void spawnInitial() {
         //for (int i = 0; i < INITIAL_ELK;    i++) organisms.add(new elk(e, 1000, randomPosition(), 100, 1, 1, 1,"ELK".concat(String.valueOf(i))));
         //for (int i = 0; i < INITIAL_WOLVES; i++) organisms.add(new wolf(e, 1000, randomPosition(), 100, 1,1 ,1,"WOLF".concat(String.valueOf(i))));
 
-        organisms.add(new elk(e, this, 1, new Position(1,1), 1, 1, 1, 1, "Weakling ELK"));
-        organisms.add(new elk(e, this, 1, new Position(1,1), 1, 1, 1, 1, "Another Weakling ELK"));
+        organisms.add(new elk("Weakling ELK",e,this,100,100,10,10,2,new Position(1,1)));
+        organisms.add(new elk("Strong ELK",e,this,100,100,10,10,2,new Position(1,1)));
 
     }
 
@@ -47,8 +47,9 @@ public void go()
 {
     spawnInitial();
     System.out.println("we have " + organisms.size() + " Organisms\n");
-    for(Organism x : organisms)
-    x.change();
+    System.out.println(organisms.get(0).toString());
+    organisms.get(0).act();
+    System.out.println(organisms.get(0).toString());
 }
 
 @Override
@@ -65,6 +66,11 @@ public List<Organism> getOrganismsWithinRange(Organism source, double range) {
         }
         return thingsNear;
 
+}
+
+public int getGridSize()
+{
+    return gridSize;
 }
 
 

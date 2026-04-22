@@ -1,13 +1,13 @@
 package Organisms;
-import Enviorment.Enviroment;
-import Enviorment.SpaceCheck;
+import Environment.Environment;
+import Environment.SpaceCheck;
 public class Grass extends Organism{
 
-    private double growthRate=enviroment.getGrowthChange();
+    private double growthRate=environment.getGrowthChange();
     private boolean isGrazed;
 
-    public Grass(Enviroment e, SpaceCheck sc, double intitialHealth) {
-        super(e, sc, intitialHealth);
+    public Grass(Environment e, SpaceCheck spaceCheck, double intitialHealth) {
+        super(e, spaceCheck, intitialHealth);
         isGrazed=false;
         
     }
