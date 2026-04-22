@@ -1,6 +1,6 @@
 package Environment;
 
-public class environment {
+public class Environment {
     
     private String[] Seasons={"SPRING","SUMMER","FALL","WINTER"};
 

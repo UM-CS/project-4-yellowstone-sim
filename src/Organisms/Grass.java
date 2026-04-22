@@ -3,7 +3,7 @@ import Environment.Environment;
 import Environment.SpaceCheck;
 public class Grass extends Organism{
 
-    private double growthRate=enviroment.getGrowthChange();
+    private double growthRate=environment.getGrowthChange();
     private boolean isGrazed;
 
     public Grass(Environment e, SpaceCheck spaceCheck, double intitialHealth) {

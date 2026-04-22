@@ -5,7 +5,7 @@ import Environment.*;
 
 public abstract class Organism{
 
-    Environment enviroment;
+    Environment environment;
     protected SpaceCheck spacecheck ;
     protected int age; 
     protected String ID;
@@ -15,7 +15,7 @@ public abstract class Organism{
 
     public Organism(Environment e, SpaceCheck spaceCheck ,double intitialHealth)
     {
-        enviroment=e;
+        environment=e;
         this.spacecheck =spaceCheck;
         age=0;
         ID="organism";

@@ -30,8 +30,8 @@ private void spawnInitial() {
         //for (int i = 0; i < INITIAL_ELK;    i++) organisms.add(new elk(e, 1000, randomPosition(), 100, 1, 1, 1,"ELK".concat(String.valueOf(i))));
         //for (int i = 0; i < INITIAL_WOLVES; i++) organisms.add(new wolf(e, 1000, randomPosition(), 100, 1,1 ,1,"WOLF".concat(String.valueOf(i))));
 
-        organisms.add(new elk(e, this, 1, new Position(1,1), 1, 1, 1, 1, "Weakling ELK"));
-        organisms.add(new elk(e, this, 1, new Position(1,1), 1, 1, 1, 1, "Another Weakling ELK"));
+        organisms.add(new elk("Weakling ELK",e,this,100,10,10,10,2,new Position(1,1)));
+        organisms.add(new elk("Strong ELK",e,this,100,10,10,10,2,new Position(1,1)));
 
     }
 
