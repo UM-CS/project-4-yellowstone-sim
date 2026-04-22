@@ -15,6 +15,17 @@ public class Environment {
     private final int WINTERTEMP=20;
 
 
+    public double getHungerMultiplier()
+    {
+        switch(season) {
+            case "SUMMER": return .7;
+            case "FALL": return 1.0;
+            case "WINTER": return 1.5;
+            case "SPRING": return 1.0;
+            default: return 1.0;
+        }
+    }
+
     public Environment()
     {
         season =Seasons[0];
@@ -42,6 +53,7 @@ public class Environment {
     }
 
 
+
         public double getTemp()
     {
         switch(season) {
@@ -52,9 +64,11 @@ public class Environment {
             default: return 1.0;
         }
     }
-    
-    
 
 
+    public String getSeason()
+    {
+        return season;
+    }
 
 }
