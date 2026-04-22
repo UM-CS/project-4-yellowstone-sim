@@ -32,9 +32,10 @@ private void spawnInitial() {
         //for (int i = 0; i < INITIAL_ELK;    i++) organisms.add(new elk(e, 1000, randomPosition(), 100, 1, 1, 1,"ELK".concat(String.valueOf(i))));
         //for (int i = 0; i < INITIAL_WOLVES; i++) organisms.add(new wolf(e, 1000, randomPosition(), 100, 1,1 ,1,"WOLF".concat(String.valueOf(i))));
 
-        organisms.add(new elk(this,"Weakling ELK",e,100,100,10,10,2,new Position(1,2)));
-        organisms.add(new elk(this,"Strong ELK",e,100,100,10,10,2,new Position(1,1)));
+        organisms.add(new elk(this,"Weakling ELK",e,new Position(1,2),100,10,10,10,2));
+        organisms.add(new elk(this,"Strong ELK",e,new Position(1,1),100,100,10,10,2));
 
+        organisms.add(new Grass(this, "grass", e, new Position(1,1),100));
     }
 
 private Position randomPosition() {
@@ -49,31 +50,36 @@ public void go()
 {
     spawnInitial();
     System.out.println("we have " + organisms.size() + " Organisms\n");
-    System.out.println(organisms.get(0).toString());
+
+    for(Organism x : organisms)
+        System.out.println(x.toString());
+
     organisms.get(0).act();
     organisms.get(1).act();
-    System.out.println(organisms.get(0).toString());
     
-    addBabies();
+   addBabies();
 
     System.out.println("we have " + organisms.size() + " Organisms\n");
 
     for(Organism x : organisms)
         System.out.println(x.toString());
+    
 }
 
 @Override
-public List<Organism> getOrganismsWithinRange(Organism source, int range) {
-    List<Organism> thingsNear =new ArrayList<>();
-    Position OrgPos=source.getPosition();
+public <x> List<x> getOrganismsWithinRange(Organism source, int range, Class<?> x) {
+    List<x> thingsNear = new ArrayList<>();
+    Position OrgPos = source.getPosition();
 
           for (Organism o : organisms) {
-            if (o != source && o.isAlive()) 
+            if (o != source && o.isAlive() &&o.getClass()==x) 
             {
-                if (OrgPos.distaceTo(o.getPosition()) <= range) thingsNear.add(o);
+                if (OrgPos.distaceTo(o.getPosition()) <= range) thingsNear.add((x) o);
+                
             }
             
         }
+        
         return thingsNear;
 
 }

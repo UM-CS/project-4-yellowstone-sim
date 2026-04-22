@@ -5,15 +5,15 @@ import java.util.List;
 import Drivers.Sim;
 import Environment.Environment;
 import Environment.Position;
-import Environment.SpaceCheck;
+import Organisms.Grass;
 import Organisms.Organism;
 
 public class elk extends Animal {
     boolean canReproduce;
     double fleeSpeed;
     
-    public elk(Sim sim,String ID, Environment e, double intitialHealth, double hunger, int speed, int reproductionAge, int sightRange, Position position) {
-        super(sim,ID, e, intitialHealth, hunger, speed, reproductionAge, sightRange, position);
+    public elk(Sim sim,String ID, Environment e, Position position, double intitialHealth, double hunger, int speed, int reproductionAge, int sightRange) {
+        super(sim,ID, e, position, intitialHealth, hunger, speed, reproductionAge, sightRange);
         canReproduce=true;
         fleeSpeed=2*speed;
         this.ID=ID;
@@ -23,21 +23,14 @@ public class elk extends Animal {
 
     @Override
     protected void reproduce() {
-        List<elk> elkNear= new ArrayList<>();
-        List<Organism> nearThis=sim.getOrganismsWithinRange(this, sightRange);
-        for(Organism x: nearThis)
-        {
-            if(x.getClass()==elk.class)
-                elkNear.add((elk) x);
-                
-        }
+        List<elk> elkNear=sim.getOrganismsWithinRange(this, sightRange, elk.class);
 
         for(elk x: elkNear)
         {
             if(x.canReproduce())
             {
                 moveTo(x.getPosition());
-                sim.takeBabies(new elk(sim,"Baby", environment,  health, hunger, speed, reproductionAge, sightRange, position));
+                sim.takeBabies(new elk(sim,"Baby", environment, position, health, hunger, speed, reproductionAge, sightRange));
             }
         }
         canReproduce=false;
@@ -48,11 +41,25 @@ public class elk extends Animal {
         this.position=position;
     }
     
-    @Override
-    protected Position findFood() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findFood'");
-    }
+    protected void findFood() {
+        
+        List<Grass> closeGrass1=sim.getOrganismsWithinRange(this, sightRange, Grass.class);
+
+        for(Grass x: closeGrass1)
+        {
+            if(!x.isGrazed())
+            {
+                moveTo(x.getPosition());
+                x.graze();
+                hunger+=10;
+                continue;
+            }
+        }
+ 
+        } 
+    
+
+    
     @Override 
     public void change()
     {

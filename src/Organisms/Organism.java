@@ -16,14 +16,14 @@ public abstract class Organism{
 
 
 
-    public Organism(Sim sim2,String ID, Environment e ,double intitialHealth)
+    public Organism(Sim sim ,String ID, Environment e, Position position,double intitialHealth)
     {
-        this.sim=sim2;
+        this.sim=sim;
         environment=e;
         age=0;
         this.ID=ID;
         health = intitialHealth;
-        position=null;
+        this.position=position;
         alive=true; 
     }
 

@@ -50,7 +50,7 @@ public Position randomPosition(Position currPosition, int speed)
 public double distaceTo(Position other)
 {
     int dx = other.getX() - this.x;
-    int dy = other.getX() - this.y;
+    int dy = other.getY() - this.y;
     double dist = Math.sqrt(dx*dx + dy*dy);
     return dist;
 
