@@ -10,7 +10,7 @@ import Organisms.Organism;
 
 public class elk extends Animal {
     boolean canReproduce;
-    double fleeSpeed;
+    int fleeSpeed;
     
     public elk(Sim sim,String ID, Environment e, Position position, double intitialHealth, double hunger, int speed, int reproductionAge, int sightRange) {
         super(sim,ID, e, position, intitialHealth, hunger, speed, reproductionAge, sightRange);
@@ -77,6 +77,10 @@ public class elk extends Animal {
     
     @Override
     public void act() {
+        if(wolfNearby())
+        {
+            flee();
+        }
         if(hunger<=0)
         {
             perish();
@@ -102,7 +106,22 @@ public class elk extends Animal {
         moveTo(position.randomPosition(position,speed));
     }
 
+    public void flee()
+    {
+        List<wolf> closeWolfs=sim.getOrganismsWithinRange(this, sightRange, wolf.class);
 
+        for(wolf x:closeWolfs)
+        {
+            position=position.flee(this,x,fleeSpeed);
+        }
+    }
+
+    private boolean wolfNearby()
+    {
+        if(sim.getOrganismsWithinRange(this, sightRange, wolf.class).size()!=0)
+            return true;
+        return false;
+    }
 
     public String getID()
     {

@@ -32,10 +32,13 @@ private void spawnInitial() {
         //for (int i = 0; i < INITIAL_ELK;    i++) organisms.add(new elk(e, 1000, randomPosition(), 100, 1, 1, 1,"ELK".concat(String.valueOf(i))));
         //for (int i = 0; i < INITIAL_WOLVES; i++) organisms.add(new wolf(e, 1000, randomPosition(), 100, 1,1 ,1,"WOLF".concat(String.valueOf(i))));
 
-        organisms.add(new elk(this,"Weakling ELK",e,new Position(1,2),100,10,10,10,2));
+        organisms.add(new elk(this,"Weakling ELK",e,new Position(50,50),100,10,10,10,2));
         organisms.add(new elk(this,"Strong ELK",e,new Position(1,1),100,100,10,10,2));
 
-        organisms.add(new Grass(this, "grass", e, new Position(1,1),100));
+        organisms.add(new Grass(this, "grass", e, new Position(0,0),100));
+        organisms.add(new Grass(this, "grass2", e, new Position(1,1),100));
+
+        organisms.add(new wolf(this, "Wolf", e, new Position(49,49), 100, 100, 10, 10, 10));
     }
 
 private Position randomPosition() {
@@ -80,6 +83,8 @@ public <x> List<x> getOrganismsWithinRange(Organism source, int range, Class<?> 
             
         }
         
+        thingsNear.sort((a,b)-> Double.compare(OrgPos.distaceTo(((Organism) a).getPosition()), OrgPos.distaceTo(((Organism) b).getPosition())));
+
         return thingsNear;
 
 }
