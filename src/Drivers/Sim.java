@@ -34,6 +34,7 @@ private void spawnInitial() {
 
         organisms.add(new elk(this,"Weakling ELK",e,new Position(50,50),100,10,10,10,2));
         organisms.add(new elk(this,"Strong ELK",e,new Position(1,1),100,100,10,10,2));
+        organisms.add(new elk(this,"Normal ELK",e,new Position(1,2),100,100,10,10,2));
 
         organisms.add(new Grass(this, "grass", e, new Position(0,0),100));
         organisms.add(new Grass(this, "grass2", e, new Position(1,1),100));
@@ -57,9 +58,12 @@ public void go()
     for(Organism x : organisms)
         System.out.println(x.toString());
 
+    System.out.println();
+
     organisms.get(0).act();
     organisms.get(1).act();
-    
+    organisms.get(2).act();
+
    addBabies();
 
     System.out.println("we have " + organisms.size() + " Organisms\n");

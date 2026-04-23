@@ -31,7 +31,7 @@ public class elk extends Animal {
             {
                 moveTo(x.getPosition());
                 sim.takeBabies(new elk(sim,"Baby", environment, position, health, hunger, speed, reproductionAge, sightRange));
-                System.out.print(" and made a baby");
+                System.out.print(" and made a baby\n");
             }
         }
         canReproduce=false;
@@ -94,9 +94,9 @@ public class elk extends Animal {
             findFood();
             System.out.println(ID+ " has looked for food ");
         }
-        else if(canReproduce && sim.getOrganismsWithinRange(this, sightRange, elk.class).size()!=0)
+        else if(canReproduce && checkForMate())
         {
-            System.out.println(ID+" tried to reproduce");
+            System.out.print(ID+" tried to reproduce");
             reproduce();
         }
         else
@@ -140,5 +140,18 @@ public class elk extends Animal {
     }
 
 
+    public boolean checkForMate()
+    {
+        List<elk> elkNear=sim.getOrganismsWithinRange(this, sightRange, elk.class);
+        if(elkNear.size()==0)
+            return false;
+        else
+        {
+            for(elk x:elkNear)
+                if(x.canReproduce())
+                    return true;
+        }
+        return false;
+    }
 
 }
