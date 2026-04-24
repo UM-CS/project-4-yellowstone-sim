@@ -2,13 +2,14 @@ package Animals;
 import Environment.Environment;
 import Environment.Position;
 import Environment.SpaceCheck;
+import java.awt.Color;
 
 public class wolf extends Animal{
 
     private double huntSpeed;
 
-    public wolf(String ID, Environment e, SpaceCheck spaceCheck, double intitialHealth, double hunger, int speed, int reproductionAge, int sightRange, Position position) {
-        super(ID, e, spaceCheck,intitialHealth, hunger, speed, reproductionAge, sightRange, position);
+    public wolf(String ID, Environment e, SpaceCheck spaceCheck, double intitialHealth, double hunger, int speed, int reproductionAge, int sightRange, Position position, Color color) {
+        super(ID, e, spaceCheck,intitialHealth, hunger, speed, reproductionAge, sightRange, position, color);
         huntSpeed= speed*1.5;
        
         

@@ -1,15 +1,15 @@
 package Animals;
+import Drivers.Sim;
 import Environment.Environment;
 import Environment.Position;
-import Environment.SpaceCheck;
+import java.awt.Color;
 
 public class elk extends Animal {
     boolean canReproduce;
     double fleeSpeed;
-    
-    public elk(String ID, Environment e, SpaceCheck spaceCheck, double intitialHealth, double hunger, int speed, int reproductionAge, int sightRange, Position position) {
-        super(ID, e, spaceCheck, intitialHealth, hunger, speed, reproductionAge, sightRange, position);
-        canReproduce=false;
+    //public elk(Sim sim,String ID, Environment e, Position position, double intitialHealth, double hunger, int speed, int reproductionAge, int sightRange)
+    public elk(Sim sim, String ID, Environment e, Position position, double intitialHealth, double hunger, int speed, int reproductionAge, int sightRange, Color color) {
+        super(ID,e,sim,intitialHealth,hunger,speed,reproductionAge,sightRange,position,color);
         fleeSpeed=2*speed;
         this.ID=ID;
     }
@@ -30,9 +30,14 @@ public class elk extends Animal {
     @Override
     protected Position findFood() {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findFood'");
+
+        //throw new UnsupportedOperationException("Unimplemented method 'findFood'");
+        //Ignore this, it sent me so many errors before i told it to just return postition and that terrified me
+         return position;
     }
-    @Override 
+
+    
+    @Override     
     public void change()
     {
         super.change();
