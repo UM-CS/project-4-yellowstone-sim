@@ -1,9 +1,10 @@
 package Animals;
+
 import java.util.List;
-
 import Environment.*;
-
 import Organisms.Organism;
+import java.awt.Color;
+
 
 public abstract class Animal extends Organism{
     protected double hunger;
@@ -14,13 +15,14 @@ public abstract class Animal extends Organism{
     protected SpaceCheck spaceCheck;
     protected String ID;
 
-    public Animal(String ID, Environment e, SpaceCheck sc, double intitialHealth, double hunger, int speed, int reproductionAge, int sightRange, Position position) {
-        super(ID, e, sc, intitialHealth);
+    public Animal(String ID, Environment e, SpaceCheck sc, double intitialHealth, double hunger, int speed, int reproductionAge, int sightRange, Position position, Color color) {        
+        super(ID, e, sc, intitialHealth, color);
         this.hunger=hunger;
         this.sightRange=sightRange;
         this.speed=speed;
         this.reproductionAge=reproductionAge;
         this.position = position;
+        this.color=color;
         
         
     }

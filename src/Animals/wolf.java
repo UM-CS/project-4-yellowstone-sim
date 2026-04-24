@@ -8,7 +8,7 @@ public class wolf extends Animal{
     private double huntSpeed;
 
     public wolf(String ID, Environment e, SpaceCheck spaceCheck, double intitialHealth, double hunger, int speed, int reproductionAge, int sightRange, Position position) {
-        super(ID, e, spaceCheck,intitialHealth, hunger, speed, reproductionAge, sightRange, position);
+        super(ID, e, spaceCheck,intitialHealth, hunger, speed, reproductionAge, sightRange, position, color);
         huntSpeed= speed*1.5;
        
         
