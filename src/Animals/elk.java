@@ -1,15 +1,20 @@
 package Animals;
+import java.util.ArrayList;
+import java.util.List;
+
+import Drivers.Sim;
 import Environment.Environment;
 import Environment.Position;
-import Environment.SpaceCheck;
+import Organisms.Grass;
+import Organisms.Organism;
 
 public class elk extends Animal {
     boolean canReproduce;
-    double fleeSpeed;
+    int fleeSpeed;
     
-    public elk(String ID, Environment e, SpaceCheck spaceCheck, double intitialHealth, double hunger, int speed, int reproductionAge, int sightRange, Position position) {
-        super(ID, e, spaceCheck, intitialHealth, hunger, speed, reproductionAge, sightRange, position);
-        canReproduce=false;
+    public elk(Sim sim,String ID, Environment e, Position position, double intitialHealth, double hunger, int speed, int reproductionAge, int sightRange) {
+        super(sim,ID, e, position, intitialHealth, hunger, speed, reproductionAge, sightRange);
+        canReproduce=true;
         fleeSpeed=2*speed;
         this.ID=ID;
     }
@@ -18,8 +23,18 @@ public class elk extends Animal {
 
     @Override
     protected void reproduce() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'reproduce'");
+        List<elk> elkNear=sim.getOrganismsWithinRange(this, sightRange, elk.class);
+
+        for(elk x: elkNear)
+        {
+            if(x.canReproduce())
+            {
+                moveTo(x.getPosition());
+                sim.takeBabies(new elk(sim,"Baby", environment, position, health, hunger, speed, reproductionAge, sightRange));
+                System.out.print(" and made a baby\n");
+            }
+        }
+        canReproduce=false;
     }
 
     @Override
@@ -27,11 +42,26 @@ public class elk extends Animal {
         this.position=position;
     }
     
-    @Override
-    protected Position findFood() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findFood'");
-    }
+    protected void findFood() {
+        
+        List<Grass> closeGrass1=sim.getOrganismsWithinRange(this, sightRange, Grass.class);
+
+        for(Grass x: closeGrass1)
+        {
+            if(!x.isGrazed())
+            {
+                moveTo(x.getPosition());
+                x.graze();
+                hunger+=10;
+                System.out.print("and found it");
+                continue;
+            }
+        }
+ 
+        } 
+    
+
+    
     @Override 
     public void change()
     {
@@ -49,7 +79,12 @@ public class elk extends Animal {
     
     @Override
     public void act() {
-        if(hunger<=0)
+        if(wolfNearby())
+        {
+            flee();
+            System.out.println(ID+" has fled a wolf");
+        }
+        else if(hunger<=0)
         {
             perish();
             return;
@@ -57,13 +92,16 @@ public class elk extends Animal {
         else if(hunger<75)
         {
             findFood();
+            System.out.println(ID+ " has looked for food ");
         }
-        else if(canReproduce)
+        else if(canReproduce && checkForMate())
         {
+            System.out.print(ID+" tried to reproduce");
             reproduce();
         }
         else
         {
+            System.out.println(ID +" wandered around");
             wander();
         }
     
@@ -74,14 +112,46 @@ public class elk extends Animal {
         moveTo(position.randomPosition(position,speed));
     }
 
+    public void flee()
+    {
+        List<wolf> closeWolfs=sim.getOrganismsWithinRange(this, sightRange, wolf.class);
 
+        for(wolf x:closeWolfs)
+        {
+            position=position.flee(this,x,fleeSpeed);
+        }
+    }
+
+    private boolean wolfNearby()
+    {
+        if(sim.getOrganismsWithinRange(this, sightRange, wolf.class).size()!=0)
+            return true;
+        return false;
+    }
 
     public String getID()
     {
         return ID;
     }
 
+    public boolean canReproduce()
+    {
+        return canReproduce;
+    }
 
 
+    public boolean checkForMate()
+    {
+        List<elk> elkNear=sim.getOrganismsWithinRange(this, sightRange, elk.class);
+        if(elkNear.size()==0)
+            return false;
+        else
+        {
+            for(elk x:elkNear)
+                if(x.canReproduce())
+                    return true;
+        }
+        return false;
+    }
 
 }
