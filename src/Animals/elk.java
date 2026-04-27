@@ -2,7 +2,6 @@ package Animals;
 import Drivers.Sim;
 import Environment.Environment;
 import Environment.Position;
-import Environment.SpaceCheck;
 import java.awt.Color;
 
 public class elk extends Animal {
@@ -26,6 +25,16 @@ public class elk extends Animal {
     @Override
     protected void moveTo(Position position) {
         this.position=position;
+        if (position != null) {
+            this.position = position;
+        }
+        if (this.position.getX()>100){
+            this.position = new Position(100, this.position.getY());
+        }
+        if (this.position.getY()>40){
+            this.position = new Position(this.position.getX(), 55);
+        }
+        
     }
     
     @Override

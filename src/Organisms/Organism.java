@@ -65,8 +65,9 @@ public String toString() {
         int drawX = position.getX() * 15 + 4; 
         int drawY = position.getY() * 15 + 4; 
         // the 15 in drawsize can be changed into a variable later 
-        int drawSize = 15 - 8; 
+        int drawSize = 15; 
         g.fillRoundRect(drawX, drawY, drawSize, drawSize, 10, 10); 
         g.setColor(Color.WHITE); 
+        g.drawString(position.toString(), drawX + 2, drawY + (drawSize / 2) + 5);
     }
 }

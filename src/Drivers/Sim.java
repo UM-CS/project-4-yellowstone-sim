@@ -33,8 +33,8 @@ public class Sim extends JPanel implements SpaceCheck {
             //for (int i = 0; i < INITIAL_ELK;    i++) organisms.add(new elk(e, 1000, randomPosition(), 100, 1, 1, 1,"ELK".concat(String.valueOf(i))));
             //for (int i = 0; i < INITIAL_WOLVES; i++) organisms.add(new wolf(e, 1000, randomPosition(), 100, 1,1 ,1,"WOLF".concat(String.valueOf(i))));
 
-            //organisms.add(new elk(this,"Weakling ELK",e,new Position(1,1),100,100,10,10,2,Color.GREEN));
-            //organisms.add(new elk(this,"Weakling ELK",e,new Position(1,1),100,100,10,10,2,Color.GREEN));
+            organisms.add(new elk(this,"Weakling ELK",e,new Position(1,1),100,100,10,10,2,Color.GREEN));
+            organisms.add(new elk(this,"Weakling ELK",e,new Position(1,1),100,100,10,10,2,Color.GREEN));
 
         }
 
@@ -81,13 +81,13 @@ public class Sim extends JPanel implements SpaceCheck {
     public Sim(int n) {
     setBackground(new Color(20, 20, 30));
 
-    organisms = new ArrayList<>();
+    //organisms = new ArrayList<>();
 
     for (int i = 0; i < n; i++) {
         organisms.add(new elk(this,"ELK_" + i,e,randomPosition(),100,100,10,10,2,Color.GREEN));
     }
 
-    new Timer(200, e -> {
+    new Timer(500, e -> {
         for (Organism o : organisms) {
             if (o.isAlive()) {
 
