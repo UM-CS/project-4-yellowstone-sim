@@ -2,22 +2,27 @@ package Organisms;
 import Environment.Environment;
 import Environment.Position;
 import Environment.SpaceCheck;
+
+import java.awt.Color;
+
 import Drivers.Sim;
 public class Grass extends Organism{
 
     private double growthRate=environment.getGrowthChange();
     private boolean isGrazed;
+    protected Color color;
 
-    public Grass(Sim sim ,String ID, Environment e,Position position, double intitialHealth ) {
+    public Grass(Sim sim ,String ID, Environment e,Position position, double intitialHealth) {
        
-        super(sim ,ID, e, position, intitialHealth);
+        super(sim ,ID, e, position, intitialHealth, Color.GREEN);
+        color=Color.GREEN;
         isGrazed=false;
         
     }
 
     @Override
     public void act(){
-        throw new UnsupportedOperationException("Unimplemented method 'change'");
+        
     }
     @Override
     public void change() {
@@ -35,6 +40,7 @@ public class Grass extends Organism{
     }
     public void graze()
     {
+        this.color=Color.WHITE;
         isGrazed=true;
     }
     public boolean isGrazed()

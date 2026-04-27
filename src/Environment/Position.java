@@ -34,13 +34,13 @@ public Position randomPosition(Position currPosition, int speed)
     sign = rand.nextBoolean() ? 1 : -1;
     int y = currPosition.getY() +(sign *rand.nextInt(speed));
 
-    if(x>100)
+    if(x>60)
     {
-        x=100;
+        x=60;
     }
-     if(y>100)
+     if(y>45)
     {
-        y=100;
+        y=45;
     }
     if(x<0)
     {
@@ -51,8 +51,7 @@ public Position randomPosition(Position currPosition, int speed)
         y=0;
     }
 
-   
-    return new Position(Math.abs(x),Math.abs(y));
+    return new Position(x,y);
      
 }
 

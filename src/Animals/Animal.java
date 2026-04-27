@@ -1,8 +1,11 @@
 package Animals;
 import Drivers.Sim;
-import Environment.*;
 
+import java.util.List;
+import Environment.*;
 import Organisms.Organism;
+import java.awt.Color;
+
 
 public abstract class Animal extends Organism{
     protected double hunger;
@@ -13,19 +16,23 @@ public abstract class Animal extends Organism{
     protected SpaceCheck world;
     protected String ID;
 
-    public Animal(Sim sim, String ID, Environment e,Position position, double intitialHealth, double hunger, int speed, int reproductionAge, int sightRange) {
-        super(sim, ID, e, position, intitialHealth);
+    public Animal(Sim sim, String ID, Environment e, Position position, double hunger,  int reproductionAge, int sightRange, int speed,  Color color) {        
+        super(sim, ID, e, position, sightRange, color);
         this.hunger=hunger;
         this.sightRange=sightRange;
         this.speed=speed;
         this.reproductionAge=reproductionAge;
-       
+        this.position = position;
+        this.color=color;
         
         
     }
 
  
     
+
+
+
 
     public void change()
     {

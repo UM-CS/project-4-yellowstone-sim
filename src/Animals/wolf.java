@@ -1,4 +1,6 @@
 package Animals;
+import java.awt.Color;
+
 import Drivers.Sim;
 import Environment.Environment;
 import Environment.Position;
@@ -7,8 +9,8 @@ public class wolf extends Animal{
 
     private double huntSpeed;
 
-    public wolf(Sim sim, String ID, Environment e, Position position, double intitialHealth, double hunger, int speed, int reproductionAge, int sightRange) {
-        super(sim, ID, e, position, intitialHealth, hunger, speed, reproductionAge, sightRange);
+    public wolf(Sim sim, String ID, Environment e, Position position, double intitialHealth, double hunger, int speed, int reproductionAge, int sightRange,Color color) {
+        super(sim, ID, e, position, hunger, reproductionAge, sightRange, speed, color);
         huntSpeed= speed*1.5;
        
         

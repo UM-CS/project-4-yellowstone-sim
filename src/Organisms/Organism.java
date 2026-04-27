@@ -1,6 +1,8 @@
 package Organisms;
 
 import Environment.*;
+import java.awt.Color;
+import java.awt.Graphics;
 
 import Drivers.Sim;
 
@@ -13,10 +15,9 @@ public abstract class Organism{
     protected double health;
     protected Position position;
     protected boolean alive;
+    protected Color color;
 
-
-
-    public Organism(Sim sim ,String ID, Environment e, Position position,double intitialHealth)
+    public Organism(Sim sim, String ID, Environment e ,Position position, double intitialHealth, Color color)
     {
         this.sim=sim;
         environment=e;
@@ -25,7 +26,9 @@ public abstract class Organism{
         health = intitialHealth;
         this.position=position;
         alive=true; 
+        this.color=color;
     }
+
 
     public void perish()
     {
@@ -57,5 +60,16 @@ public String toString() {
   public String getID()
     {
         return ID;
+    }
+
+    public void draw(Graphics g) { 
+        g.setColor(color); 
+        int drawX = position.getX() * 15 + 4; 
+        int drawY = position.getY() * 15 + 4; 
+        // the 15 in drawsize can be changed into a variable later 
+        int drawSize = 15; 
+        g.fillRoundRect(drawX, drawY, drawSize, drawSize, 10, 10); 
+        g.setColor(Color.WHITE); 
+        g.drawString(ID, drawX + 2, drawY + (drawSize / 2) + 5);
     }
 }
