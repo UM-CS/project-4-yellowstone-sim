@@ -1,8 +1,7 @@
 package Environment;
 
-import java.util.Random;
-
 import Organisms.Organism;
+import java.util.Random;
 
 public class Position {
 private int x;
