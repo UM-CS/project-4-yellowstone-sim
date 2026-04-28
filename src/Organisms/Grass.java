@@ -40,8 +40,10 @@ public class Grass extends Organism{
     }
     public void graze()
     {
-        this.color=Color.WHITE;
+        
         isGrazed=true;
+        changeColor(Color.WHITE);
+
     }
     public boolean isGrazed()
     {

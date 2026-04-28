@@ -82,6 +82,9 @@ public class Sim extends JPanel implements SpaceCheck {
                 }
                 
             }
+
+            thingsNear.sort(java.util.Comparator.comparingDouble(o -> OrgPos.distaceTo(((Organism)o).getPosition())));
+            
             return thingsNear;
 
     }
