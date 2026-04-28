@@ -1,6 +1,7 @@
 package Animals;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import Drivers.Sim;
 import Environment.Environment;
@@ -16,6 +17,7 @@ import java.util.List;
 public class elk extends Animal {
     boolean canReproduce=true;
     int fleeSpeed;
+    private Random random = new Random();
     
     public elk(Sim sim, String ID, Environment e, Position position, double intitialHealth, double hunger, int speed, int reproductionAge, int sightRange, Color color) {
         super(sim, ID, e, position, hunger, reproductionAge, sightRange,speed, color);
@@ -63,7 +65,7 @@ public class elk extends Animal {
                 x.graze();
                 hunger+=10;
                 System.out.print("and found it");
-                continue;
+                return;
             }
             else wander();
         }
@@ -83,6 +85,11 @@ public class elk extends Animal {
         else
         {
             this.canReproduce=false;
+        }
+        
+        if(age>100)
+        {
+            health=health-random.nextInt(5);
         }
 
     }
