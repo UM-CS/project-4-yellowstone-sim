@@ -1,10 +1,9 @@
 package Drivers;
-
 import Animals.*;
 import Environment.Environment;
 import Environment.Position;
 import Environment.SpaceCheck;
-import Organisms.Organism;
+import Organisms.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -21,6 +20,7 @@ public class Sim extends JPanel implements SpaceCheck {
     private int tickCount = 0;
     Environment e= new Environment();
     private final int seasonLength=75;
+    public List<Organism> babieList = new ArrayList<>();
 
 
     private final int INITIAL_ELK =10;
@@ -33,8 +33,18 @@ public class Sim extends JPanel implements SpaceCheck {
             //for (int i = 0; i < INITIAL_ELK;    i++) organisms.add(new elk(e, 1000, randomPosition(), 100, 1, 1, 1,"ELK".concat(String.valueOf(i))));
             //for (int i = 0; i < INITIAL_WOLVES; i++) organisms.add(new wolf(e, 1000, randomPosition(), 100, 1,1 ,1,"WOLF".concat(String.valueOf(i))));
 
-            organisms.add(new elk(this,"Weakling ELK",e,new Position(1,1),100,100,10,10,2,Color.GREEN));
-            organisms.add(new elk(this,"Weakling ELK",e,new Position(1,1),100,100,10,10,2,Color.GREEN));
+            organisms.add(new elk(this,"Strong ELK",e,new Position(1,1),100,50,10,10,10,Color.YELLOW));
+            organisms.add(new elk(this,"Weakling ELK",e,new Position(60,45),100,100,10,10,10,Color.GREEN));
+
+            organisms.add(new Grass(this, "grass", e, new Position(10,10), CELL_SIZE));
+        
+            organisms.add(new Grass(this, "grass", e, new Position(15,10), CELL_SIZE ));
+
+        organisms.add(new Grass(this, "grass", e, new Position(20,10), CELL_SIZE));
+
+        organisms.add(new Grass(this, "grass", e, new Position(25,10), CELL_SIZE));
+
+        organisms.add(new Grass(this, "grass", e, new Position(30,10), CELL_SIZE));
 
         }
 
@@ -46,24 +56,29 @@ public class Sim extends JPanel implements SpaceCheck {
     }    
 
 
-    // public void go()
-    // {
-    //     spawnInitial();
-    //     System.out.println("we have " + organisms.size() + " Organisms\n");
-    //     System.out.println(organisms.get(0).toString());
-    //     organisms.get(0).act();
-    //     System.out.println(organisms.get(0).toString());
-    // }
+
+
+    public void takeBabies(Organism x)
+    {
+        babieList.add(x);
+    }
+
+    public void addBabies()
+    {
+        for(Organism x: babieList)
+            organisms.add(x);
+        babieList.clear();
+    }
 
     @Override
-    public List<Organism> getOrganismsWithinRange(Organism source, double range) {
-        List<Organism> thingsNear =new ArrayList<>();
+     public <x> List<x> getOrganismsWithinRange(Organism source, int range, Class<?> x) {
+        List<x> thingsNear =new ArrayList<>();
         Position OrgPos=source.getPosition();
 
             for (Organism o : organisms) {
-                if (o != source && o.isAlive()) 
+                if (o != source && o.isAlive() && o.getClass()==x) 
                 {
-                    if (OrgPos.distaceTo(o.getPosition()) <= range) thingsNear.add(o);
+                    if (OrgPos.distaceTo(o.getPosition()) <= range) thingsNear.add((x) o);
                 }
                 
             }
@@ -78,25 +93,23 @@ public class Sim extends JPanel implements SpaceCheck {
 
 
 
-    public Sim(int n) {
+    public void go(int n) {
     setBackground(new Color(20, 20, 30));
 
-    organisms = new ArrayList<>();
+    spawnInitial();    
 
-    for (int i = 0; i < n; i++) {
-        organisms.add(new elk(this,"ELK_" + i,e,randomPosition(),100,100,10,10,2,Color.GREEN));
-    }
-
-    new Timer(200, e -> {
+    new Timer(500, e -> {
         for (Organism o : organisms) {
             if (o.isAlive()) {
 
                 //commented out for testing purposes
                 //o.change();
-                o.act();
+               o.act();
+                System.out.println(o.toString());
             }
         }
         organisms.removeIf(o -> !o.isAlive());
+        addBabies();
         repaint();
     }).start();
 }

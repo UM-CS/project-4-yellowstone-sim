@@ -1,16 +1,24 @@
 package Animals;
+import java.util.ArrayList;
+import java.util.List;
+
+import Drivers.Sim;
+import Environment.Environment;
+import Environment.Position;
+import Organisms.Grass;
+import Organisms.Organism;
 import Drivers.Sim;
 import Environment.Environment;
 import Environment.Position;
 import java.awt.Color;
+import java.util.List;
 
 public class elk extends Animal {
-    boolean canReproduce;
-    double fleeSpeed;
-    //public elk(Sim sim,String ID, Environment e, Position position, double intitialHealth, double hunger, int speed, int reproductionAge, int sightRange)
+    boolean canReproduce=true;
+    int fleeSpeed;
+    
     public elk(Sim sim, String ID, Environment e, Position position, double intitialHealth, double hunger, int speed, int reproductionAge, int sightRange, Color color) {
-        super(ID,e,sim,intitialHealth,hunger,speed,reproductionAge,sightRange,position,color);
-        fleeSpeed=2*speed;
+        super(sim, ID, e, position, hunger, reproductionAge, sightRange,speed, color);
         this.ID=ID;
     }
 
@@ -18,26 +26,53 @@ public class elk extends Animal {
 
     @Override
     protected void reproduce() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'reproduce'");
+        List<elk> elkNear=sim.getOrganismsWithinRange(this, sightRange, elk.class);
+
+        for(elk x: elkNear)
+        {
+            if(x.canReproduce())
+            {
+                moveTo(x.getPosition());
+                sim.takeBabies(new elk(sim,"Baby", environment, position, health, hunger, speed, reproductionAge, sightRange, color));
+                System.out.print(" and made a baby\n");
+                x.canReproduce=false;
+            }
+        }
+        this.canReproduce=false;
+
     }
 
     @Override
     protected void moveTo(Position position) {
         this.position=position;
+        if (position != null) {
+            this.position = position;
+        }
+
     }
     
-    @Override
-    protected Position findFood() {
-        // TODO Auto-generated method stub
+    protected void findFood() {
+        
+        List<Grass> closeGrass1=sim.getOrganismsWithinRange(this, sightRange, Grass.class);
 
-        //throw new UnsupportedOperationException("Unimplemented method 'findFood'");
-        //Ignore this, it sent me so many errors before i told it to just return postition and that terrified me
-         return position;
-    }
+        for(Grass x: closeGrass1)
+        {
+            if(!x.isGrazed())
+            {
+                moveTo(x.getPosition());
+                x.graze();
+                hunger+=10;
+                System.out.print("and found it");
+                continue;
+            }
+            else wander();
+        }
+ 
+        } 
+    
 
     
-    @Override     
+    @Override 
     public void change()
     {
         super.change();
@@ -54,21 +89,29 @@ public class elk extends Animal {
     
     @Override
     public void act() {
-        if(hunger<=0)
+        if(wolfNearby())
+        {
+            flee();
+            System.out.println(ID+" has fled a wolf");
+        }
+        else if(hunger<=0)
         {
             perish();
             return;
         }
-        else if(hunger<75)
+        else if(hunger<75 && foodNearby())
         {
             findFood();
+            System.out.println(ID+ " has looked for food ");
         }
-        else if(canReproduce)
+        else if(canReproduce && checkForMate())
         {
+            System.out.print(ID+" tried to reproduce");
             reproduce();
         }
         else
         {
+            System.out.println(ID +" wandered around");
             wander();
         }
     
@@ -76,17 +119,59 @@ public class elk extends Animal {
     }
     private void wander() {
 
-        moveTo(position.randomPosition(position,speed));
+        moveTo(position.randomPosition(position, speed));
     }
 
+    public void flee()
+    {
 
+        List<wolf> closeWolfs=sim.getOrganismsWithinRange(this, sightRange, wolf.class);
 
+        for(wolf x:closeWolfs)
+        {
+            position=position.flee(this,x,fleeSpeed);
+        }
+    }
+
+    private boolean wolfNearby()
+    {
+        if(sim.getOrganismsWithinRange(this, sightRange, wolf.class).size()!=0)
+            return true;
+        return false;
+    }
+
+        private boolean foodNearby()
+    {
+        List <Grass> x=sim.getOrganismsWithinRange(this, sightRange, Grass.class);
+        if(x.size()!=0)
+            return true;
+        return false;
+    }
+
+ 
     public String getID()
     {
         return ID;
     }
 
+    public boolean canReproduce()
+    {
+        return canReproduce;
+    }
 
 
+    public boolean checkForMate()
+    {
+        List<elk> elkNear=sim.getOrganismsWithinRange(this, sightRange, elk.class);
+        if(elkNear.size()==0)
+            return false;
+        else
+        {
+            for(elk x:elkNear)
+                if(x.canReproduce())
+                    return true;
+        }
+        return false;
+    }
 
 }

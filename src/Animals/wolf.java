@@ -1,15 +1,16 @@
 package Animals;
+import java.awt.Color;
+
+import Drivers.Sim;
 import Environment.Environment;
 import Environment.Position;
-import Environment.SpaceCheck;
-import java.awt.Color;
 
 public class wolf extends Animal{
 
     private double huntSpeed;
 
-    public wolf(String ID, Environment e, SpaceCheck spaceCheck, double intitialHealth, double hunger, int speed, int reproductionAge, int sightRange, Position position, Color color) {
-        super(ID, e, spaceCheck,intitialHealth, hunger, speed, reproductionAge, sightRange, position, color);
+    public wolf(Sim sim, String ID, Environment e, Position position, double intitialHealth, double hunger, int speed, int reproductionAge, int sightRange,Color color) {
+        super(sim, ID, e, position, hunger, reproductionAge, sightRange, speed, color);
         huntSpeed= speed*1.5;
        
         
@@ -34,11 +35,7 @@ public class wolf extends Animal{
         throw new UnsupportedOperationException("Unimplemented method 'moveTo'");
     }
 
-    @Override
-    protected Position findFood() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findFood'");
-    }
+    
     
     protected void hunt()
     {}

@@ -7,10 +7,11 @@ public class App {
 
         JFrame frame = new JFrame("Yellowstone Simulation");
 
-        Sim sim = new Sim(5);
+        Sim sim = new Sim();
 
+        sim.go(5);
         frame.add(sim);
-        frame.setSize(1500, 1500); // adjust as needed
+        frame.setSize(1000, 1000); // adjust as needed
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null); // center screen
         frame.setVisible(true);
