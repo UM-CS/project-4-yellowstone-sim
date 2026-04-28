@@ -1,15 +1,8 @@
 package Animals;
-import java.util.ArrayList;
-import java.util.List;
-
 import Drivers.Sim;
 import Environment.Environment;
 import Environment.Position;
 import Organisms.Grass;
-import Organisms.Organism;
-import Drivers.Sim;
-import Environment.Environment;
-import Environment.Position;
 import java.awt.Color;
 import java.util.List;
 
@@ -173,5 +166,4 @@ public class elk extends Animal {
         }
         return false;
     }
-
 }

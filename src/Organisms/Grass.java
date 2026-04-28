@@ -1,11 +1,8 @@
 package Organisms;
+import Drivers.Sim;
 import Environment.Environment;
 import Environment.Position;
-import Environment.SpaceCheck;
-
 import java.awt.Color;
-
-import Drivers.Sim;
 public class Grass extends Organism{
 
     private double growthRate=environment.getGrowthChange();
@@ -27,7 +24,7 @@ public class Grass extends Organism{
     @Override
     public void change() {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'change'");
+        //throw new UnsupportedOperationException("Unimplemented method 'change'");
     }
 
     private void grow()
