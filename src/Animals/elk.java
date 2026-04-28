@@ -71,11 +71,11 @@ public class elk extends Animal {
         super.change();
         if(environment.getSeason()=="Fall")
         {
-            this.canReproduce=true;
+            this.canReproduce=false;
         }
         else
         {
-            this.canReproduce=false;
+            this.canReproduce=true;
         }
 
     }
@@ -101,6 +101,7 @@ public class elk extends Animal {
         {
             System.out.print(ID+" tried to reproduce");
             reproduce();
+            wander();
         }
         else
         {
