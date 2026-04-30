@@ -1,11 +1,9 @@
 package Animals;
-import java.awt.Color;
-
 import Drivers.Sim;
 import Environment.Environment;
 import Environment.Position;
+import java.awt.Color;
 import java.util.List;
-import Animals.elk;
 
 public class wolf extends Animal{
 
@@ -87,6 +85,10 @@ public class wolf extends Animal{
     {moveTo(position.randomPosition(position, speed));}
 
     public boolean canReproduce() {
+        //cap on number of elks in the world
+        List<wolf> wolfNear=sim.getOrganismsWithinRange(this, 100, wolf.class);
+        if(wolfNear.size()>30)
+            canReproduce=false;
         return canReproduce;
     }
 

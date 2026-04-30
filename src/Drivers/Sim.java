@@ -7,8 +7,10 @@ import Organisms.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Supplier;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -22,6 +24,8 @@ public class Sim extends JPanel implements SpaceCheck {
     private final int seasonLength=75;
     public List<Organism> babieList = new ArrayList<>();
 
+    private Color elkColor = new Color(150,75,0);
+
 
     private final int INITIAL_ELK =10;
     private final int INITIAL_GRASS =50;
@@ -33,8 +37,8 @@ public class Sim extends JPanel implements SpaceCheck {
             //for (int i = 0; i < INITIAL_ELK;    i++) organisms.add(new elk(e, 1000, randomPosition(), 100, 1, 1, 1,"ELK".concat(String.valueOf(i))));
             //for (int i = 0; i < INITIAL_WOLVES; i++) organisms.add(new wolf(e, 1000, randomPosition(), 100, 1,1 ,1,"WOLF".concat(String.valueOf(i))));
 
-           organisms.add(new elk(this,"Strong ELK",environment,new Position(1,1),100,50,10,10,10,Color.YELLOW));
-           organisms.add(new elk(this,"Weakling ELK",environment,new Position(60,45),100,100,10,10,10,Color.GREEN));
+           organisms.add(new elk(this,"Strong ELK",environment,new Position(1,1),100,50,10,10,10,elkColor));
+           organisms.add(new elk(this,"Weakling ELK",environment,new Position(60,45),100,100,10,10,10,elkColor));
 
            // organisms.add(new Grass(this, "grass", e, new Position(10,10), CELL_SIZE));
         
@@ -107,6 +111,14 @@ public class Sim extends JPanel implements SpaceCheck {
     setBackground(new Color(20, 20, 30));
 
     spawnInitial();    
+
+    Random r = new Random();
+    List<Supplier<Organism>> types = Arrays.asList(
+        () -> new Grass(this, "grass", environment, randomPosition(), CELL_SIZE),
+        () -> new elk(this,"Strong ELK",environment,randomPosition(),100,70,10,10,10, elkColor),
+        () -> new wolf(this, "wolf", environment, randomPosition(), 100,50,10,10,10,Color.RED)
+    );
+    for(int i=0; i<n; i++) organisms.add(types.get(r.nextInt(types.size())).get());
 
     new Timer(750, e -> {
         tickCount+=1;
