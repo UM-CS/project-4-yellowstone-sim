@@ -78,7 +78,7 @@ public class elk extends Animal {
     public void change()
     {
         super.change();
-        if(environment.getSeason()=="Fall")
+        if(environment.getSeason().equals("FALL"))
         {
             this.canReproduce=true;
         }
@@ -111,7 +111,7 @@ public class elk extends Animal {
             findFood();
             System.out.println(ID+ " has looked for food ");
         }
-        else if(canReproduce && checkForMate())
+        else if(canReproduce && checkForMate() && sim.organismsCount()<200)
         {
             System.out.print(ID+" tried to reproduce");
             reproduce();

@@ -83,19 +83,20 @@ public Position flee(Organism source, Organism threat, int speed) {
     int newX = (int) (source.getPosition().getX() + normalX * speed);
     int newY = (int) (source.getPosition().getY() + normalY * speed);
     
-    if(newX>100)
+
+    if(x>60)
     {
-        x=100;
+        x=60;
     }
-     if(newY>100)
+     if(y>45)
     {
-        y=100;
+        y=45;
     }
-    if(newX<0)
+    if(x<0)
     {
         x=0;
     }
-     if(newY<0)
+     if(y<0)
     {
         y=0;
     }
