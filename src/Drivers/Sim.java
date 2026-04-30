@@ -18,7 +18,7 @@ public class Sim extends JPanel implements SpaceCheck {
     private final int CELL_SIZE = 15;
     private List<Organism> organisms = new ArrayList<>();
     private int tickCount = 0;
-    Environment e= new Environment();
+    protected Environment environment= new Environment();
     private final int seasonLength=75;
     public List<Organism> babieList = new ArrayList<>();
 
@@ -33,18 +33,18 @@ public class Sim extends JPanel implements SpaceCheck {
             //for (int i = 0; i < INITIAL_ELK;    i++) organisms.add(new elk(e, 1000, randomPosition(), 100, 1, 1, 1,"ELK".concat(String.valueOf(i))));
             //for (int i = 0; i < INITIAL_WOLVES; i++) organisms.add(new wolf(e, 1000, randomPosition(), 100, 1,1 ,1,"WOLF".concat(String.valueOf(i))));
 
-            organisms.add(new elk(this,"Strong ELK",e,new Position(1,1),100,50,10,10,10,Color.YELLOW));
-            organisms.add(new elk(this,"Weakling ELK",e,new Position(60,45),100,100,10,10,10,Color.GREEN));
+           // organisms.add(new elk(this,"Strong ELK",e,new Position(1,1),100,50,10,10,10,Color.YELLOW));
+            //organisms.add(new elk(this,"Weakling ELK",e,new Position(60,45),100,100,10,10,10,Color.GREEN));
 
-            organisms.add(new Grass(this, "grass", e, new Position(10,10), CELL_SIZE));
+           // organisms.add(new Grass(this, "grass", e, new Position(10,10), CELL_SIZE));
         
-            organisms.add(new Grass(this, "grass", e, new Position(15,10), CELL_SIZE ));
+           // organisms.add(new Grass(this, "grass", e, new Position(15,10), CELL_SIZE ));
 
-        organisms.add(new Grass(this, "grass", e, new Position(20,10), CELL_SIZE));
+       // organisms.add(new Grass(this, "grass", e, new Position(20,10), CELL_SIZE));
 
-        organisms.add(new Grass(this, "grass", e, new Position(25,10), CELL_SIZE));
+       // organisms.add(new Grass(this, "grass", e, new Position(25,10), CELL_SIZE));
 
-        organisms.add(new Grass(this, "grass", e, new Position(30,10), CELL_SIZE));
+        organisms.add(new Grass(this, "grass", environment, new Position(30,10), CELL_SIZE));
 
         organisms.add(new wolf(this, "wolf", e, new Position(10,10), 100,50,10,10,10,Color.YELLOW));
 
@@ -96,6 +96,11 @@ public class Sim extends JPanel implements SpaceCheck {
         return gridSize;
     }
 
+    public int getTick()
+    {
+        return tickCount;
+    }
+
 
 
     public void go(int n) {
@@ -103,17 +108,23 @@ public class Sim extends JPanel implements SpaceCheck {
 
     spawnInitial();    
 
-    new Timer(500, e -> {
+    new Timer(750, e -> {
+        tickCount+=1;
         for (Organism o : organisms) {
             if (o.isAlive()) {
 
                 //commented out for testing purposes
-                //o.change();
+                o.change();
                o.act();
-                System.out.println(o.toString());
+                //System.out.println(o.toString());
             }
         }
         organisms.removeIf(o -> !o.isAlive());
+        if(tickCount%10==0)
+        {
+            System.out.println(environment.getSeason());
+            environment.changeSeason();
+        }
         addBabies();
         repaint();
     }).start();
