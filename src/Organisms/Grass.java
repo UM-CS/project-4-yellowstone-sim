@@ -4,6 +4,7 @@ import Environment.Position;
 import Environment.SpaceCheck;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.util.Random;
 
 import Drivers.Sim;
@@ -70,4 +71,19 @@ public class Grass extends Organism{
        return super.toString()+ String.format(" | Grazed: %b ", isGrazed);
         
     }
+
+    @Override
+    public void draw(Graphics g)
+    {
+        g.setColor(color); 
+        int drawX = position.getX() * 15 + 4; 
+        int drawY = position.getY() * 15 + 4; 
+        // the 15 in drawsize can be changed into a variable later 
+        int drawSize = 15; 
+        g.fillRoundRect(drawX, drawY, drawSize, drawSize, 10, 10); 
+        g.setColor(Color.WHITE); 
+        
+    }
 }
+
+
