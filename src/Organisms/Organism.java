@@ -36,6 +36,11 @@ public abstract class Organism{
         System.out.println(ID+" died");
     }
 
+    public void changeColor(Color color)
+    {
+        this.color=color;
+    }
+
     public boolean isAlive()
     {
         return alive;
