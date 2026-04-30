@@ -33,8 +33,8 @@ public class Sim extends JPanel implements SpaceCheck {
             //for (int i = 0; i < INITIAL_ELK;    i++) organisms.add(new elk(e, 1000, randomPosition(), 100, 1, 1, 1,"ELK".concat(String.valueOf(i))));
             //for (int i = 0; i < INITIAL_WOLVES; i++) organisms.add(new wolf(e, 1000, randomPosition(), 100, 1,1 ,1,"WOLF".concat(String.valueOf(i))));
 
-           // organisms.add(new elk(this,"Strong ELK",e,new Position(1,1),100,50,10,10,10,Color.YELLOW));
-            //organisms.add(new elk(this,"Weakling ELK",e,new Position(60,45),100,100,10,10,10,Color.GREEN));
+           organisms.add(new elk(this,"Strong ELK",environment,new Position(1,1),100,50,10,10,10,Color.YELLOW));
+           organisms.add(new elk(this,"Weakling ELK",environment,new Position(60,45),100,100,10,10,10,Color.GREEN));
 
            // organisms.add(new Grass(this, "grass", e, new Position(10,10), CELL_SIZE));
         
@@ -42,11 +42,11 @@ public class Sim extends JPanel implements SpaceCheck {
 
        // organisms.add(new Grass(this, "grass", e, new Position(20,10), CELL_SIZE));
 
-       // organisms.add(new Grass(this, "grass", e, new Position(25,10), CELL_SIZE));
+       organisms.add(new Grass(this, "grass", environment, new Position(25,10), CELL_SIZE));
 
         organisms.add(new Grass(this, "grass", environment, new Position(30,10), CELL_SIZE));
 
-        organisms.add(new wolf(this, "wolf", e, new Position(10,10), 100,50,10,10,10,Color.YELLOW));
+        organisms.add(new wolf(this, "wolf", environment, new Position(10,10), 100,50,10,10,10,Color.YELLOW));
 
         }
 
