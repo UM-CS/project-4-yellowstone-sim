@@ -26,7 +26,7 @@ public class elk extends Animal {
             if(x.canReproduce())
             {
                 moveTo(x.getPosition());
-                sim.takeBabies(new elk(sim,"Baby", environment, position, health, hunger, speed, reproductionAge, sightRange, color));
+                sim.takeBabies(new elk(sim,"Baby", environment, position, health, 50, speed, reproductionAge, sightRange, color));
                 System.out.print(" and made a baby\n");
                 x.canReproduce=false;
             }
@@ -150,6 +150,10 @@ public class elk extends Animal {
 
     public boolean canReproduce()
     {
+        //cap on number of elks in the world
+        List<elk> elkNear=sim.getOrganismsWithinRange(this, 100, elk.class);
+        if(elkNear.size()>30)
+            canReproduce=false;
         return canReproduce;
     }
 
