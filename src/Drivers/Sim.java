@@ -46,6 +46,8 @@ public class Sim extends JPanel implements SpaceCheck {
 
         organisms.add(new Grass(this, "grass", e, new Position(30,10), CELL_SIZE));
 
+        organisms.add(new wolf(this, "wolf", e, new Position(10,10), 100,50,10,10,10,Color.YELLOW));
+
         }
 
     private Position randomPosition() {
