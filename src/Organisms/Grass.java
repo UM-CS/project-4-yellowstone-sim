@@ -3,11 +3,13 @@ import Drivers.Sim;
 import Environment.Environment;
 import Environment.Position;
 import java.awt.Color;
+import java.util.Random;
 public class Grass extends Organism{
 
-    private double growthRate=environment.getGrowthChange();
     private boolean isGrazed;
     protected Color color;
+    private Random random = new Random();
+
 
     public Grass(Sim sim ,String ID, Environment e,Position position, double intitialHealth) {
        
@@ -19,21 +21,34 @@ public class Grass extends Organism{
 
     @Override
     public void act(){
-        
+        double x=environment.getGrowthChange();
+       if(random.nextDouble(x)>1 && !isGrazed)
+       {
+        spread();
+       }
+       else if(random.nextDouble(x)>1 &&  isGrazed)
+       {
+        grow();
+       }
     }
     @Override
     public void change() {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'change'");
+        double x=environment.getHungerMultiplier();
+         if(random.nextDouble(x)>.9)
+       {
+        perish();
+       }
     }
 
     private void grow()
     {
-        //TODO
+         isGrazed=false;
+        changeColor(Color.GREEN);
     }
 
     private void spread(){
-
+        System.out.println("spread");
+        sim.takeBabies(new Grass(sim, "babygrass", environment, this.position.randomPosition(position, 4), health));
     }
     public void graze()
     {

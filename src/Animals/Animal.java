@@ -36,7 +36,7 @@ public abstract class Animal extends Organism{
 
     public void change()
     {
-        hunger = hunger-(5*environment.getHungerMultiplier());
+        hunger = hunger-(1*environment.getHungerMultiplier());
         age=age+1;
 
     }

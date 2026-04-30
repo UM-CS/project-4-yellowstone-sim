@@ -7,10 +7,8 @@ import Organisms.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.function.Supplier;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -20,7 +18,7 @@ public class Sim extends JPanel implements SpaceCheck {
     private final int CELL_SIZE = 15;
     private List<Organism> organisms = new ArrayList<>();
     private int tickCount = 0;
-    Environment e= new Environment();
+    protected Environment environment= new Environment();
     private final int seasonLength=75;
     public List<Organism> babieList = new ArrayList<>();
 
@@ -35,20 +33,20 @@ public class Sim extends JPanel implements SpaceCheck {
             //for (int i = 0; i < INITIAL_ELK;    i++) organisms.add(new elk(e, 1000, randomPosition(), 100, 1, 1, 1,"ELK".concat(String.valueOf(i))));
             //for (int i = 0; i < INITIAL_WOLVES; i++) organisms.add(new wolf(e, 1000, randomPosition(), 100, 1,1 ,1,"WOLF".concat(String.valueOf(i))));
 
-        //     organisms.add(new elk(this,"Strong ELK",e,new Position(1,1),100,50,10,10,10,Color.YELLOW));
-        //     organisms.add(new elk(this,"Weakling ELK",e,new Position(60,45),100,100,10,10,10,Color.GREEN));
+           organisms.add(new elk(this,"Strong ELK",environment,new Position(1,1),100,50,10,10,10,Color.YELLOW));
+           organisms.add(new elk(this,"Weakling ELK",environment,new Position(60,45),100,100,10,10,10,Color.GREEN));
 
-        //     organisms.add(new Grass(this, "grass", e, new Position(10,10), CELL_SIZE));
+           // organisms.add(new Grass(this, "grass", e, new Position(10,10), CELL_SIZE));
         
-        //     organisms.add(new Grass(this, "grass", e, new Position(15,10), CELL_SIZE ));
+           // organisms.add(new Grass(this, "grass", e, new Position(15,10), CELL_SIZE ));
 
-        // organisms.add(new Grass(this, "grass", e, new Position(20,10), CELL_SIZE));
+       // organisms.add(new Grass(this, "grass", e, new Position(20,10), CELL_SIZE));
 
-        // organisms.add(new Grass(this, "grass", e, new Position(25,10), CELL_SIZE));
+       organisms.add(new Grass(this, "grass", environment, new Position(25,10), CELL_SIZE));
 
-        // organisms.add(new Grass(this, "grass", e, new Position(30,10), CELL_SIZE));
+        organisms.add(new Grass(this, "grass", environment, new Position(30,10), CELL_SIZE));
 
-        organisms.add(new wolf(this, "wolf", e, new Position(10,10), 100,50,10,10,10,Color.YELLOW));
+        organisms.add(new wolf(this, "wolf", environment, new Position(10,10), 100,50,10,10,10,Color.YELLOW));
 
         }
 
@@ -98,31 +96,35 @@ public class Sim extends JPanel implements SpaceCheck {
         return gridSize;
     }
 
+    public int getTick()
+    {
+        return tickCount;
+    }
+
 
 
     public void go(int n) {
     setBackground(new Color(20, 20, 30));
 
     spawnInitial();    
-    Random r = new Random();
-    List<Supplier<Organism>> types = Arrays.asList(
-        () -> new Grass(this, "grass", e, randomPosition(), CELL_SIZE),
-        () -> new elk(this,"Strong ELK",e,new Position(1,1),100,70,10,10,10,Color.YELLOW),
-        () -> new wolf(this,"Strong WOLF",e,new Position(60,45),1000,100,1,1,1,Color.RED)
-    );
-    for(int i=0; i<n; i++) organisms.add(types.get(r.nextInt(types.size())).get());
 
-    new Timer(500, e -> {
+    new Timer(750, e -> {
+        tickCount+=1;
         for (Organism o : organisms) {
             if (o.isAlive()) {
 
-                //comment out for testing purposes
+                //commented out for testing purposes
                 o.change();
-                o.act();
-                System.out.println(o.toString());
+               o.act();
+                //System.out.println(o.toString());
             }
         }
         organisms.removeIf(o -> !o.isAlive());
+        if(tickCount%10==0)
+        {
+            System.out.println(environment.getSeason());
+            environment.changeSeason();
+        }
         addBabies();
         repaint();
     }).start();
