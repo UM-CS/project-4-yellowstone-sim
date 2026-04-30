@@ -18,7 +18,7 @@ public class Sim extends JPanel implements SpaceCheck {
     private final int CELL_SIZE = 15;
     private List<Organism> organisms = new ArrayList<>();
     private int tickCount = 0;
-    Environment e= new Environment();
+    protected Environment environment= new Environment();
     private final int seasonLength=75;
     public List<Organism> babieList = new ArrayList<>();
 
@@ -44,7 +44,7 @@ public class Sim extends JPanel implements SpaceCheck {
 
        // organisms.add(new Grass(this, "grass", e, new Position(25,10), CELL_SIZE));
 
-        organisms.add(new Grass(this, "grass", e, new Position(30,10), CELL_SIZE));
+        organisms.add(new Grass(this, "grass", environment, new Position(30,10), CELL_SIZE));
 
         }
 
@@ -94,6 +94,11 @@ public class Sim extends JPanel implements SpaceCheck {
         return gridSize;
     }
 
+    public int getTick()
+    {
+        return tickCount;
+    }
+
 
 
     public void go(int n) {
@@ -112,8 +117,12 @@ public class Sim extends JPanel implements SpaceCheck {
                 //System.out.println(o.toString());
             }
         }
-        System.out.print(tickCount);
         organisms.removeIf(o -> !o.isAlive());
+        if(tickCount%10==0)
+        {
+            System.out.println(environment.getSeason());
+            environment.changeSeason();
+        }
         addBabies();
         repaint();
     }).start();
