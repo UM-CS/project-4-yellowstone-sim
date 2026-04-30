@@ -46,7 +46,7 @@ public class Sim extends JPanel implements SpaceCheck {
 
         organisms.add(new Grass(this, "grass", environment, new Position(30,10), CELL_SIZE));
 
-        organisms.add(new wolf(this, "wolf", environment, new Position(10,10), 100,50,10,10,10,Color.YELLOW));
+        //organisms.add(new wolf(this, "wolf", environment, new Position(10,10), 100,50,10,10,10,Color.YELLOW));
 
         }
 
@@ -59,6 +59,10 @@ public class Sim extends JPanel implements SpaceCheck {
 
 
 
+    public int organismsCount()
+    {
+        return organisms.size();
+    }
 
     public void takeBabies(Organism x)
     {

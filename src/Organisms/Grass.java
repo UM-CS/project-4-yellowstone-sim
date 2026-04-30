@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
 
+import Animals.elk;
 import Drivers.Sim;
 public class Grass extends Organism{
 
@@ -19,14 +20,14 @@ public class Grass extends Organism{
        
         super(sim ,ID, e, position, intitialHealth, Color.GREEN);
         color=Color.GREEN;
-        isGrazed=false;
+        
         
     }
 
     @Override
     public void act(){
         double x=environment.getGrowthChange();
-       if(random.nextDouble(x)>1 && !isGrazed)
+       if(random.nextDouble(x)>1 && sim.organismsCount()<150)
        {
         spread();
        }
@@ -54,18 +55,8 @@ public class Grass extends Organism{
         System.out.println("spread");
         sim.takeBabies(new Grass(sim, "babygrass", environment, this.position.randomPosition(position, 4), health));
     }
-    public void graze()
-    {
-        
-        isGrazed=true;
-        changeColor(Color.WHITE);
 
-    }
-    public boolean isGrazed()
-    {
-        return isGrazed;
-    }
-    
+
     public String toString()
     {
        return super.toString()+ String.format(" | Grazed: %b ", isGrazed);

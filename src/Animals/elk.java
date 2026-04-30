@@ -59,10 +59,10 @@ public class elk extends Animal {
 
         for(Grass x: closeGrass1)
         {
-            if(!x.isGrazed())
+            if(x.isAlive())
             {
                 moveTo(x.getPosition());
-                x.graze();
+                x.perish();
                 hunger+=10;
                 System.out.print("and found it");
                 return;
