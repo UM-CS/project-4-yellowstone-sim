@@ -21,6 +21,7 @@ public class elk extends Animal {
     
     public elk(Sim sim, String ID, Environment e, Position position, double intitialHealth, double hunger, int speed, int birthDay, int sightRange, Color color) {
         super(sim, ID, e, position, hunger, birthDay, sightRange,speed, color);
+        fleeSpeed = speed;
     }
 
  
@@ -135,7 +136,7 @@ public class elk extends Animal {
 
         for(wolf x:closeWolfs)
         {
-            position=position.flee(this,x,fleeSpeed);
+            moveTo(position.flee(this,x,fleeSpeed));
         }
     }
 

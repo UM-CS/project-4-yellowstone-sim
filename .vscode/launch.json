@@ -9,6 +9,13 @@
             "name": "App",
             "request": "launch",
             "mainClass": "Drivers.App",
+            "projectName": "project-4-yellowstone-sim_b52dc435"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "Drivers.App",
             "projectName": "project-4-yellowstone-sim_c33346b3"
         },
         {

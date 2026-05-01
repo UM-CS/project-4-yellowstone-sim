@@ -77,6 +77,10 @@ public Position flee(Organism source, Organism threat, int speed) {
     int dy = source.getPosition().getY() - threat.getPosition().getY();
 
     double magnitude = Math.sqrt(dx * dx + dy * dy);
+    if (magnitude == 0) {
+        return randomPosition(source.getPosition(), speed);
+    }
+
     double normalX = dx / magnitude;
     double normalY = dy / magnitude;
 
@@ -84,21 +88,21 @@ public Position flee(Organism source, Organism threat, int speed) {
     int newY = (int) (source.getPosition().getY() + normalY * speed);
     
 
-    if(x>60)
+    if(newX>60)
     {
-        x=60;
+        newX=60;
     }
-     if(y>45)
+     if(newY>45)
     {
-        y=45;
+        newY=45;
     }
-    if(x<0)
+    if(newX<0)
     {
-        x=0;
+        newX=0;
     }
-     if(y<0)
+     if(newY<0)
     {
-        y=0;
+        newY=0;
     }
 
     return new Position(newX, newY);
