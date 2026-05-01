@@ -64,8 +64,7 @@ public class elk extends Animal {
             if(x.isAlive())
             {
                 moveTo(x.getPosition());
-                x.perish();
-                hunger+=20;
+                hunger+=x.graze();
                 System.out.print("and found it");
                 return;
             }
