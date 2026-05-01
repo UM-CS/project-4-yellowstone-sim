@@ -5,12 +5,14 @@ import Drivers.Sim;
 import Environment.Environment;
 import Environment.Position;
 import java.util.List;
+import java.util.Random;
 import Animals.elk;
 
 public class wolf extends Animal{
 
     private double huntSpeed;
     private boolean canReproduce = true;
+    private Random random = new Random();
 
     public wolf(Sim sim, String ID, Environment e, Position position, double intitialHealth, double hunger, int speed, int reproductionAge, int sightRange,Color color) {
         super(sim, ID, e, position, hunger, reproductionAge, sightRange,speed, color);
@@ -27,9 +29,14 @@ public class wolf extends Animal{
             if(x.canReproduce())
             {
                 moveTo(x.getPosition());
-                sim.takeBabies(new wolf(sim,"Baby", environment, position, health, hunger, speed, birthDay, sightRange, color));
+                int litterSize = random.nextInt(3) + 4;
+                for (int i = 0; i < litterSize; i++) {
+                    sim.takeBabies(new wolf(sim,"Baby", environment, position, health, hunger, speed, sim.getTick(), sightRange, color));
+                }
                 System.out.print(" and made a baby\n");
                 x.canReproduce=false;
+                this.canReproduce=false;
+                return;
             }
         }
         this.canReproduce=false;

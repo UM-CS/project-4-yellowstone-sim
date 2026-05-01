@@ -38,6 +38,8 @@ public class elk extends Animal {
                 sim.takeBabies(new elk(sim,"Baby", environment, position, health, hunger, speed, sim.getTick(), sightRange, color));
                 System.out.print(" and made a baby\n");
                 x.canReproduce=false;
+                this.canReproduce=false;
+                return;
             }
         }
         this.canReproduce=false;
