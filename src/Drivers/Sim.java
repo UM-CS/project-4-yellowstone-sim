@@ -27,6 +27,10 @@ public class Sim extends JPanel implements SpaceCheck {
     private final int INITIAL_ELK =10;
     private final int INITIAL_GRASS =100;
     private final int INITIAL_WOLVES =2;
+    private final Position VOLCANO_POSITION = new Position(30, 22);
+    private final int VOLCANO_RADIUS = 6;
+    private final int VOLCANO_INTERVAL = 50;
+    private int eruptionTicksLeft = 0;
 
 
     private void spawnInitial() {
@@ -94,6 +98,19 @@ public class Sim extends JPanel implements SpaceCheck {
         return tickCount;
     }
 
+    private void volcano()
+    {
+        System.out.println("The volcano erupted!");
+        eruptionTicksLeft = 3;
+        for(Organism o : organisms)
+        {
+            if(o.getPosition().distaceTo(VOLCANO_POSITION) <= VOLCANO_RADIUS)
+            {
+                o.perish();
+            }
+        }
+    }
+
 
 
     public void go(int n) {
@@ -112,6 +129,14 @@ public class Sim extends JPanel implements SpaceCheck {
                 //System.out.println(o.toString());
             }
         }
+        if(tickCount % VOLCANO_INTERVAL == 0)
+        {
+            volcano();
+        }
+        if(eruptionTicksLeft > 0)
+        {
+            eruptionTicksLeft--;
+        }
         organisms.removeIf(o -> !o.isAlive());
         if(tickCount%10==0)
         {
@@ -129,5 +154,28 @@ public class Sim extends JPanel implements SpaceCheck {
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             for (Organism a : organisms) a.draw(g);
+            drawVolcano(g);
+        }
+
+        private void drawVolcano(Graphics g) {
+            int volcanoX = VOLCANO_POSITION.getX() * CELL_SIZE + 4;
+            int volcanoY = VOLCANO_POSITION.getY() * CELL_SIZE + 4;
+
+            if(eruptionTicksLeft > 0)
+            {
+                int blastSize = VOLCANO_RADIUS * CELL_SIZE * 2;
+                int blastX = volcanoX - (VOLCANO_RADIUS * CELL_SIZE);
+                int blastY = volcanoY - (VOLCANO_RADIUS * CELL_SIZE);
+                g.setColor(new Color(255, 80, 0, 90));
+                g.fillOval(blastX, blastY, blastSize, blastSize);
+            }
+
+            g.setColor(new Color(100, 60, 45));
+            int[] xPoints = {volcanoX - 12, volcanoX, volcanoX + 12};
+            int[] yPoints = {volcanoY + 14, volcanoY - 14, volcanoY + 14};
+            g.fillPolygon(xPoints, yPoints, 3);
+
+            g.setColor(new Color(255, 80, 0));
+            g.fillOval(volcanoX - 4, volcanoY - 10, 8, 8);
         }
 }
