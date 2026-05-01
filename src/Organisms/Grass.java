@@ -13,19 +13,25 @@ public class Grass extends Organism{
 
     protected Color color;
     private Random random = new Random();
+    private double growthRate;
+    private boolean grazed;
+    private int size;
+    private final int maxSize = 5;
 
 
     public Grass(Sim sim ,String ID, Environment e,Position position, double intitialHealth) {
-        Color initialColor = e.getColor();
-        super(sim ,ID, e, position, intitialHealth, initialColor);
-        this.color = initialColor;
+        super(sim ,ID, e, position, intitialHealth, e.getColor());
+        this.color = e.getColor();
+        growthRate = 1.0;
+        grazed = false;
+        size = 1;
     }
 
     @Override
     public void act(){
         color=environment.getColor();
         double x=environment.getGrowthChange();
-       if(Math.random()<x && sim.organismsCount()<250)
+       if(size >= maxSize && Math.random()<x && sim.organismsCount()<250)
        {
         spread();
        }
@@ -37,10 +43,32 @@ public class Grass extends Organism{
          if(Math.random()<x)
        {
         perish();
+        return;
        }
 
+       grow();
     }
 
+    private void grow(){
+        if(!grazed && size < maxSize && Math.random() < environment.getGrowthChange() * growthRate)
+        {
+            size++;
+        }
+        grazed = false;
+    }
+
+    public double graze(){
+        grazed = true;
+        int amountEaten = Math.min(size, 2);
+        size -= amountEaten;
+
+        if(size <= 0)
+        {
+            perish();
+        }
+
+        return amountEaten * 10;
+    }
 
 
 
@@ -63,7 +91,7 @@ public class Grass extends Organism{
         int drawX = position.getX() * 15 + 4; 
         int drawY = position.getY() * 15 + 4; 
         // the 15 in drawsize can be changed into a variable later 
-        int drawSize = 15; 
+        int drawSize = 5 + (size * 2); 
         g.fillRoundRect(drawX, drawY, drawSize, drawSize, 10, 10); 
         g.setColor(Color.WHITE); 
         

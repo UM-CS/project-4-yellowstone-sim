@@ -21,7 +21,7 @@ public class elk extends Animal {
     
     public elk(Sim sim, String ID, Environment e, Position position, double intitialHealth, double hunger, int speed, int birthDay, int sightRange, Color color) {
         super(sim, ID, e, position, hunger, birthDay, sightRange,speed, color);
-        this.ID=ID;
+        fleeSpeed = speed;
     }
 
  
@@ -38,6 +38,8 @@ public class elk extends Animal {
                 sim.takeBabies(new elk(sim,"Baby", environment, position, health, hunger, speed, sim.getTick(), sightRange, color));
                 System.out.print(" and made a baby\n");
                 x.canReproduce=false;
+                this.canReproduce=false;
+                return;
             }
         }
         this.canReproduce=false;
@@ -62,8 +64,7 @@ public class elk extends Animal {
             if(x.isAlive())
             {
                 moveTo(x.getPosition());
-                x.perish();
-                hunger+=20;
+                hunger+=x.graze();
                 System.out.print("and found it");
                 return;
             }
@@ -136,7 +137,7 @@ public class elk extends Animal {
 
         for(wolf x:closeWolfs)
         {
-            position=position.flee(this,x,fleeSpeed);
+            moveTo(position.flee(this,x,fleeSpeed));
         }
     }
 

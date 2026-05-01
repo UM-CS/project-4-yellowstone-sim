@@ -14,7 +14,6 @@ public abstract class Animal extends Organism{
     protected int speed;
     protected int birthDay;
     protected SpaceCheck world;
-    protected String ID;
 
     public Animal(Sim sim, String ID, Environment e, Position position, double hunger,  int birthDay, int sightRange, int speed,  Color color) {        
         super(sim, ID, e, position, sightRange, color);
