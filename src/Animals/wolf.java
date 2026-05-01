@@ -47,7 +47,7 @@ public class wolf extends Animal{
         hunt();
       }
 
-      else if (canReproduce && checkForMate()) {
+      else if (canReproduce && checkForMate() && environment.getSeason().equals("SPRING")  && sim.getTick()-birthDay>15) {
         System.out.print(ID+" tried to reproduce");
         reproduce();
       }

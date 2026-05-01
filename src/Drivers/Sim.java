@@ -25,41 +25,23 @@ public class Sim extends JPanel implements SpaceCheck {
 
 
     private final int INITIAL_ELK =10;
-    private final int INITIAL_GRASS =50;
-    private final int INITIAL_WOLVES =10;
+    private final int INITIAL_GRASS =100;
+    private final int INITIAL_WOLVES =2;
 
 
     private void spawnInitial() {
-            //for (int i = 0; i < INITIAL_GRASS;  i++) organisms.add(new Grass(e,10));
-            //for (int i = 0; i < INITIAL_ELK;    i++) organisms.add(new elk(e, 1000, randomPosition(), 100, 1, 1, 1,"ELK".concat(String.valueOf(i))));
-            //for (int i = 0; i < INITIAL_WOLVES; i++) organisms.add(new wolf(e, 1000, randomPosition(), 100, 1,1 ,1,"WOLF".concat(String.valueOf(i))));
+            for (int i = 0; i < INITIAL_GRASS;  i++) organisms.add(new Grass(this, "grass", environment, randomPosition(), CELL_SIZE));
+            for (int i = 0; i < INITIAL_ELK;    i++) organisms.add(new elk(this,"elk",environment,randomPosition(),100,100,10,0,10,elkColor));
+            for (int i = 0; i < INITIAL_WOLVES; i++) organisms.add(new wolf(this, "wolf", environment,randomPosition(), 100,100,10,0,10,Color.YELLOW));
 
-           organisms.add(new elk(this,"Strong ELK",environment,new Position(1,1),100,50,10,0,10,elkColor));
-           organisms.add(new elk(this,"Weakling ELK",environment,new Position(2,2),100,100,10,0,10,elkColor));
-                   organisms.add(new elk(this,"Weakling ELK",environment,new Position(2,2),100,100,10,0,10,elkColor));
-
-                              organisms.add(new elk(this,"Weakling ELK",environment,new Position(2,2),100,100,10,0,10,elkColor));
-
-                                         organisms.add(new elk(this,"Weakling ELK",environment,new Position(2,2),100,100,10,0,10,elkColor));
-
-           organisms.add(new Grass(this, "grass", environment, new Position(10,10), CELL_SIZE));
-        
-           organisms.add(new Grass(this, "grass", environment, new Position(15,10), CELL_SIZE ));
-
-       organisms.add(new Grass(this, "grass", environment, new Position(20,10), CELL_SIZE));
-
-       organisms.add(new Grass(this, "grass", environment, new Position(25,10), CELL_SIZE));
-
-        organisms.add(new Grass(this, "grass", environment, new Position(30,10), CELL_SIZE));
-
-        organisms.add(new wolf(this, "wolf", environment, new Position(10,10), 100,50,10,10,10,Color.YELLOW));
+          
 
         }
 
     private Position randomPosition() {
         Random rand = new Random();
-        int x = rand.nextInt(gridSize);
-        int y = rand.nextInt(gridSize);
+        int x = rand.nextInt(60);
+        int y = rand.nextInt(45);
         return new Position(x, y);
     }    
 

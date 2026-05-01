@@ -63,7 +63,7 @@ public class elk extends Animal {
             {
                 moveTo(x.getPosition());
                 x.perish();
-                hunger+=10;
+                hunger+=20;
                 System.out.print("and found it");
                 return;
             }

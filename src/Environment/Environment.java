@@ -7,14 +7,9 @@ public class Environment {
     private String[] Seasons={"SPRING","SUMMER","FALL","WINTER"};
 
     private String season;
-    private int tempature; 
-    private int tickDay;
 
-    //create a system where theses vary tick to tick but will be constant for now
-    private final int SPRINGTEMP=40;
-    private final int SUMMERTEMP=70;
-    private final int FALLTEMP=40;
-    private final int WINTERTEMP=20;
+
+
 
 
     public double getHungerMultiplier()
@@ -31,8 +26,7 @@ public class Environment {
     public Environment()
     {
         season =Seasons[0];
-        tempature=SPRINGTEMP;
-        tickDay=0;
+
     }
 
     public void changeSeason()
@@ -47,7 +41,7 @@ public class Environment {
     {
         switch(season) {
             case "SUMMER": return .7;
-            case "FALL": return 0.3;
+            case "FALL": return 0.5;
             case "WINTER": return .05;
             case "SPRING": return .9;
             default: return 0;
@@ -59,8 +53,8 @@ public class Environment {
     {
         switch(season) {
             case "SUMMER": return .05;
-            case "FALL": return 0.2;
-            case "WINTER": return .6;
+            case "FALL": return 0.1;
+            case "WINTER": return .3;
             case "SPRING": return .02;
             default: return 0;
         }
@@ -84,16 +78,6 @@ public class Environment {
         }
     }
 
-        public double getTemp()
-    {
-        switch(season) {
-            case "SUMMER": return 1.2;
-            case "FALL": return 1.0;
-            case "WINTER": return 0.2;
-            case "SPRING": return 1.5;
-            default: return 1.0;
-        }
-    }
 
 
     public String getSeason()

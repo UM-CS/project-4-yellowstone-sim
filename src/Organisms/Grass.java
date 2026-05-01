@@ -25,7 +25,7 @@ public class Grass extends Organism{
     public void act(){
         color=environment.getColor();
         double x=environment.getGrowthChange();
-       if(Math.random()<x && sim.organismsCount()<150)
+       if(Math.random()<x && sim.organismsCount()<250)
        {
         spread();
        }
