@@ -102,13 +102,51 @@ public class Sim extends JPanel implements SpaceCheck {
     {
         System.out.println("The volcano erupted!");
         eruptionTicksLeft = 3;
+        Class<?> majorityAnimal = getMajorityAnimalType();
+
         for(Organism o : organisms)
         {
             if(o.getPosition().distaceTo(VOLCANO_POSITION) <= VOLCANO_RADIUS)
             {
-                o.perish();
+                if(o instanceof Grass || majorityAnimal != null && majorityAnimal.isInstance(o))
+                {
+                    o.perish();
+                }
             }
         }
+    }
+
+    private Class<?> getMajorityAnimalType()
+    {
+        int elkCount = countLiving(elk.class);
+        int wolfCount = countLiving(wolf.class);
+
+        if(elkCount > wolfCount)
+        {
+            System.out.println("Elk are in the majority.");
+            return elk.class;
+        }
+        if(wolfCount > elkCount)
+        {
+            System.out.println("Wolves are in the majority.");
+            return wolf.class;
+        }
+
+        System.out.println("Elk and wolves are tied.");
+        return null;
+    }
+
+    private int countLiving(Class<?> type)
+    {
+        int count = 0;
+        for(Organism o : organisms)
+        {
+            if(o.isAlive() && type.isInstance(o))
+            {
+                count++;
+            }
+        }
+        return count;
     }
 
 
