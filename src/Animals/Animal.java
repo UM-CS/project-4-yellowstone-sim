@@ -12,16 +12,16 @@ public abstract class Animal extends Organism{
     protected int maxAge;
     protected int sightRange;
     protected int speed;
-    protected int reproductionAge;
+    protected int birthDay;
     protected SpaceCheck world;
     protected String ID;
 
-    public Animal(Sim sim, String ID, Environment e, Position position, double hunger,  int reproductionAge, int sightRange, int speed,  Color color) {        
+    public Animal(Sim sim, String ID, Environment e, Position position, double hunger,  int birthDay, int sightRange, int speed,  Color color) {        
         super(sim, ID, e, position, sightRange, color);
         this.hunger=hunger;
         this.sightRange=sightRange;
         this.speed=speed;
-        this.reproductionAge=reproductionAge;
+        this.birthDay=birthDay;
         this.position = position;
         this.color=color;
         
@@ -36,7 +36,7 @@ public abstract class Animal extends Organism{
 
     public void change()
     {
-        hunger = hunger-(1*environment.getHungerMultiplier());
+        hunger = hunger-(5*environment.getHungerMultiplier());
         age=age+1;
 
     }

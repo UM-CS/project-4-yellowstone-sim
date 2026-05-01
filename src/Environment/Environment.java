@@ -1,5 +1,7 @@
 package Environment;
 
+import java.awt.Color;
+
 public class Environment {
     
     private String[] Seasons={"SPRING","SUMMER","FALL","WINTER"};
@@ -19,9 +21,9 @@ public class Environment {
     {
         switch(season) {
             case "SUMMER": return .7;
-            case "FALL": return 1.0;
+            case "FALL": return .7;
             case "WINTER": return 1.5;
-            case "SPRING": return 1.0;
+            case "SPRING": return .7;
             default: return 1.0;
         }
     }
@@ -44,15 +46,43 @@ public class Environment {
     public double getGrowthChange()
     {
         switch(season) {
-            case "SUMMER": return 1.2;
-            case "FALL": return 0.8;
-            case "WINTER": return 0.4;
-            case "SPRING": return 2.0;
+            case "SUMMER": return .7;
+            case "FALL": return 0.3;
+            case "WINTER": return .05;
+            case "SPRING": return .9;
             default: return 0;
         }
     }
 
 
+        public double getDeathChange()
+    {
+        switch(season) {
+            case "SUMMER": return .05;
+            case "FALL": return 0.2;
+            case "WINTER": return .6;
+            case "SPRING": return .02;
+            default: return 0;
+        }
+    }
+
+    public Color getColor()
+    {
+        switch (season == null ? "" : season.toLowerCase()) {
+            case "spring":
+                return Color.GREEN;
+            case "summer":
+                return new Color(34, 139, 34);
+                
+            case "fall":
+                return new Color(210, 105, 30);
+            case "winter":
+                return Color.LIGHT_GRAY;
+            default:
+                return Color.GREEN;
+                
+        }
+    }
 
         public double getTemp()
     {

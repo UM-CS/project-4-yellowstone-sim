@@ -19,8 +19,8 @@ public class elk extends Animal {
     int fleeSpeed;
     private Random random = new Random();
     
-    public elk(Sim sim, String ID, Environment e, Position position, double intitialHealth, double hunger, int speed, int reproductionAge, int sightRange, Color color) {
-        super(sim, ID, e, position, hunger, reproductionAge, sightRange,speed, color);
+    public elk(Sim sim, String ID, Environment e, Position position, double intitialHealth, double hunger, int speed, int birthDay, int sightRange, Color color) {
+        super(sim, ID, e, position, hunger, birthDay, sightRange,speed, color);
         this.ID=ID;
     }
 
@@ -35,7 +35,7 @@ public class elk extends Animal {
             if(x.canReproduce())
             {
                 moveTo(x.getPosition());
-                sim.takeBabies(new elk(sim,"Baby", environment, position, health, hunger, speed, reproductionAge, sightRange, color));
+                sim.takeBabies(new elk(sim,"Baby", environment, position, health, hunger, speed, sim.getTick(), sightRange, color));
                 System.out.print(" and made a baby\n");
                 x.canReproduce=false;
             }
@@ -78,7 +78,7 @@ public class elk extends Animal {
     public void change()
     {
         super.change();
-        if(environment.getSeason().equals("FALL"))
+        if(environment.getSeason().equals("FALL") && sim.getTick()-birthDay>15)
         {
             this.canReproduce=true;
         }

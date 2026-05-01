@@ -27,7 +27,7 @@ public class wolf extends Animal{
             if(x.canReproduce())
             {
                 moveTo(x.getPosition());
-                sim.takeBabies(new wolf(sim,"Baby", environment, position, health, hunger, speed, reproductionAge, sightRange, color));
+                sim.takeBabies(new wolf(sim,"Baby", environment, position, health, hunger, speed, birthDay, sightRange, color));
                 System.out.print(" and made a baby\n");
                 x.canReproduce=false;
             }
@@ -78,7 +78,7 @@ public class wolf extends Animal{
             elk target = targets.get(0);
             moveTo(target.getPosition());
             target.perish();
-            this.hunger += 20;
+            this.hunger += 50;
             System.out.println(ID + " hunted " + target.getID());
         }
     }

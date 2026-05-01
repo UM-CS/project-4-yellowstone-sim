@@ -11,56 +11,49 @@ import Animals.elk;
 import Drivers.Sim;
 public class Grass extends Organism{
 
-    private boolean isGrazed;
     protected Color color;
     private Random random = new Random();
 
 
     public Grass(Sim sim ,String ID, Environment e,Position position, double intitialHealth) {
-       
-        super(sim ,ID, e, position, intitialHealth, Color.GREEN);
-        color=Color.GREEN;
-        
-        
+        Color initialColor = e.getColor();
+        super(sim ,ID, e, position, intitialHealth, initialColor);
+        this.color = initialColor;
     }
 
     @Override
     public void act(){
+        color=environment.getColor();
         double x=environment.getGrowthChange();
-       if(random.nextDouble(x)>1 && sim.organismsCount()<150)
+       if(Math.random()<x && sim.organismsCount()<150)
        {
         spread();
        }
-       else if(random.nextDouble(x)>1 &&  isGrazed)
-       {
-        grow();
-       }
+
     }
     @Override
     public void change() {
-        double x=environment.getHungerMultiplier();
-         if(random.nextDouble(x)>.9)
+        double x=environment.getDeathChange();
+         if(Math.random()<x)
        {
         perish();
        }
+
     }
 
-    private void grow()
-    {
-         isGrazed=false;
-        changeColor(Color.GREEN);
-    }
+
+
+
+
 
     private void spread(){
-        System.out.println("spread");
         sim.takeBabies(new Grass(sim, "babygrass", environment, this.position.randomPosition(position, 4), health));
     }
 
 
     public String toString()
     {
-       return super.toString()+ String.format(" | Grazed: %b ", isGrazed);
-        
+       return super.toString();
     }
 
     @Override
