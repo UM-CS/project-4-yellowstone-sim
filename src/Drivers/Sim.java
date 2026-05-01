@@ -29,7 +29,7 @@ public class Sim extends JPanel implements SpaceCheck {
     private final int INITIAL_WOLVES =2;
     private final Position VOLCANO_POSITION = new Position(30, 22);
     private final int VOLCANO_RADIUS = 6;
-    private final int VOLCANO_INTERVAL = 50;
+    private final int VOLCANO_INTERVAL = 30;
     private int eruptionTicksLeft = 0;
 
 
